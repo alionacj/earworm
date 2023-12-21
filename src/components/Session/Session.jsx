@@ -1,6 +1,15 @@
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 function Session() {
+
+    const history = useHistory()
+
+    const exit = () => {
+        history.push('/home')
+    }
+    const next = () => {
+        history.push('/review')
+    }
 
     return (
         <>
@@ -23,8 +32,9 @@ function Session() {
                 <button>M7</button>
                 <button>8ve</button>
             </div>
-            <button>EXIT</button>
-            <button>NEXT</button>
+            <button onClick={exit}>EXIT</button>
+            {/* placeholder to review - will eventually move to next question */}
+            <button onClick={next}>NEXT</button>
         </>
     )
 }

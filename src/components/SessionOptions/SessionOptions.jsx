@@ -1,6 +1,15 @@
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 function SessionOptions() {
+
+    const history = useHistory()
+
+    const exit = () => {
+        history.push('/home')
+    }
+    const start = () => {
+        history.push('/session')
+    }
 
     return (
         <>
@@ -25,8 +34,8 @@ function SessionOptions() {
                 <button>Descending</button>
             <h3>SELECT SOUND</h3>
                 <p>dropdown</p>
-            <button>EXIT</button>
-            <button>START</button>
+            <button onClick={exit}>EXIT</button>
+            <button onClick={start}>START</button>
         </>
     )
 }

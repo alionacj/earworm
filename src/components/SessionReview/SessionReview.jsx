@@ -1,6 +1,18 @@
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 function SessionReview() {
+
+    const history = useHistory()
+
+    const exit = () => {
+        history.push('/home')
+    }
+    const retry = () => {
+        history.push('/session')
+    }
+    const pastSessions = () => {
+        history.push('/history')
+    }
 
     return (
         <>
@@ -11,11 +23,11 @@ function SessionReview() {
                 <p>HIGHEST SCORING: X X%</p>
                 <p>LOWEST SCORING: X X%</p>
                 <p>interval scores dropdown</p>
-                <button>VIEW SESSIONS</button>
+                <button onClick={pastSessions}>VIEW SESSIONS</button>
             </div>
                 <br></br><br></br>
-            <button>EXIT</button>
-            <button>RETRY</button>
+            <button onClick={exit}>EXIT</button>
+            <button onClick={retry}>RETRY</button>
         </>
     )
 }

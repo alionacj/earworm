@@ -1,6 +1,15 @@
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 function SessionHistory() {
+
+    const history = useHistory()
+
+    const back = () => {
+        history.push('/review')
+    }
+    const exit = () => {
+        history.push('/home')
+    }
 
     return (
         <>
@@ -8,8 +17,8 @@ function SessionHistory() {
             <div>
                 <p>sessions go here</p>
             </div>
-            <button>BACK</button>
-            <button>EXIT</button>
+            <button onClick={back}>BACK</button>
+            <button onClick={exit}>EXIT</button>
         </>
     )
 }
