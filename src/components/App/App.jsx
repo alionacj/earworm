@@ -8,7 +8,6 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -31,7 +30,6 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
         <Switch>
 
 
