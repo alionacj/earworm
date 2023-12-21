@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import HomePage from '../HomePage/HomePage';
+import SessionOptions from '../SessionOptions/SessionOptions';
 import UserPage from '../UserPage/UserPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -72,6 +73,9 @@ function App() {
             <HomePage />
           </ProtectedRoute>
 
+          <ProtectedRoute exact path="/options">
+            <SessionOptions />
+          </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
