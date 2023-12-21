@@ -1,10 +1,15 @@
 
 
-function information() {
+function Information() {
 
     return (
-        'Information'
+        <>
+            <h3>INFORMATION</h3>
+            <p>theory goes here</p>
+            <button>EXIT</button>
+            <button>START</button>
+        </>
     )
 }
 
-export default information
+export default Information

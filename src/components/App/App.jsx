@@ -9,11 +9,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+
 import HomePage from '../HomePage/HomePage';
 import SessionOptions from '../SessionOptions/SessionOptions';
 import Session from '../Session/Session';
 import SessionReview from '../SessionReview/SessionReview';
 import SessionHistory from '../SessionHistory/SessionHistory';
+import Information from '../Information/Information';
 import UserPage from '../UserPage/UserPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -90,6 +92,10 @@ function App() {
 
           <ProtectedRoute exact path="/history">
             <SessionHistory />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/info">
+            <Information />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
