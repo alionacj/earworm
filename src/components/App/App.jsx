@@ -13,6 +13,7 @@ import HomePage from '../HomePage/HomePage';
 import SessionOptions from '../SessionOptions/SessionOptions';
 import Session from '../Session/Session';
 import SessionReview from '../SessionReview/SessionReview';
+import SessionHistory from '../SessionHistory/SessionHistory';
 import UserPage from '../UserPage/UserPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -85,6 +86,10 @@ function App() {
 
           <ProtectedRoute exact path="/review">
             <SessionReview />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/history">
+            <SessionHistory />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
