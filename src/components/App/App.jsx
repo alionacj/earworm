@@ -8,8 +8,6 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import UserPage from '../UserPage/UserPage';
 import LandingPage from '../LandingPage/LandingPage';
@@ -102,7 +100,6 @@ function App() {
 
           
         </Switch>
-        <Footer />
       </div>
     </Router>
   );
