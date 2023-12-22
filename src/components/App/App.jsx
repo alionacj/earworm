@@ -11,15 +11,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import HomePage from '../HomePage/HomePage';
+import Statistics from '../Statistics/Statistics';
+import Information from '../Information/Information';
+
+import LoginPage from '../LoginPage/LoginPage';
+import RegisterPage from '../RegisterPage/RegisterPage';
+
 import SessionOptions from '../SessionOptions/SessionOptions';
 import Session from '../Session/Session';
 import SessionReview from '../SessionReview/SessionReview';
 import SessionHistory from '../SessionHistory/SessionHistory';
-import Information from '../Information/Information';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -80,6 +84,10 @@ function App() {
 
           <ProtectedRoute exact path="/history">
             <SessionHistory />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/stats">
+            <Statistics />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/info">
