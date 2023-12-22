@@ -25,7 +25,8 @@ function Statistics() {
                 <p>interval dropdown</p>
                 <button onClick={viewSessions}>VIEW SESSIONS</button>
             </div>
-            <button onClick={exit}>EXIT</button>
+                <br/>
+            <button onClick={exit}>HOME</button>
             <button onClick={start}>START</button>
         </>
     )
