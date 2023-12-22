@@ -1,5 +1,7 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
+import LogOutButton from "../LogOutButton/LogOutButton"
+
 function HomePage () {
 
     const history = useHistory()
@@ -20,6 +22,7 @@ function HomePage () {
             <button onClick={startSession}>Start Session</button>
             <button onClick={viewStats}> View Statistics</button>
             <button onClick={info}>Info</button>
+            <LogOutButton />
         </>
     )
 }
