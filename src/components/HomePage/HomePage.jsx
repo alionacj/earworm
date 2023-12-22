@@ -12,7 +12,7 @@ function HomePage () {
     const viewStats = () => {
         history.push('/stats')
     }
-    const info = () => {
+    const seeInfo = () => {
         history.push('/info')
     }
 
@@ -20,8 +20,11 @@ function HomePage () {
         <>
             <p>Welcome!</p>
             <button onClick={startSession}>Start Session</button>
+                <br/>
             <button onClick={viewStats}> View Statistics</button>
-            <button onClick={info}>Info</button>
+                <br/>
+            <button onClick={seeInfo}>Information</button>
+                <br/><br/>
             <LogOutButton />
         </>
     )
