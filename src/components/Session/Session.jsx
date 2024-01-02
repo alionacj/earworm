@@ -32,6 +32,7 @@ function Session() {
                 <button>M7</button>
                 <button>8ve</button>
             </div>
+                <br/>
             <button onClick={exit}>EXIT</button>
             {/* placeholder to review - will eventually move to next question */}
             <button onClick={next}>NEXT</button>

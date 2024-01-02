@@ -10,17 +10,22 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+import Header from '../Header/Header';
+
 import HomePage from '../HomePage/HomePage';
+import Statistics from '../Statistics/Statistics';
+import Information from '../Information/Information';
+
+import LoginPage from '../LoginPage/LoginPage';
+import RegisterPage from '../RegisterPage/RegisterPage';
+
 import SessionOptions from '../SessionOptions/SessionOptions';
 import Session from '../Session/Session';
 import SessionReview from '../SessionReview/SessionReview';
 import SessionHistory from '../SessionHistory/SessionHistory';
-import Information from '../Information/Information';
-import UserPage from '../UserPage/UserPage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -34,22 +39,11 @@ function App() {
   return (
     <Router>
       <div>
+        <Header />
+
         <Switch>
-
-
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/login" />
-
-
-          {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-            Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          {/* logged in shows UserPage else shows LoginPage */}
-          <ProtectedRoute exact path="/user">
-            <UserPage />
-          </ProtectedRoute>
-
 
           <Route exact path="/login">
             {user.id ?
@@ -61,7 +55,6 @@ function App() {
               <LoginPage />
             }
           </Route>
-
 
           <Route exact path="/registration">
             {user.id ?
@@ -94,6 +87,10 @@ function App() {
             <SessionHistory />
           </ProtectedRoute>
 
+          <ProtectedRoute exact path="/stats">
+            <Statistics />
+          </ProtectedRoute>
+
           <ProtectedRoute exact path="/info">
             <Information />
           </ProtectedRoute>
@@ -103,7 +100,6 @@ function App() {
             <h1>404</h1>
           </Route>
           
-
         </Switch>
       </div>
     </Router>
