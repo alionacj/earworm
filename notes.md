@@ -2,7 +2,12 @@ general to-do:
 - make routes inaccessible unless ongoing session
 
 session options
-- figure out button groups/mutiple button select..
-    - look like I can do this with MUI. I didnt want to do any styling 
-- change playback to a radial
+- (X) figure out button groups/mutiple button select..
+    - looks like I can do this with MUI. I didnt want to do 
+      any styling but it might be necessary to install it now
+- (-) change playback to a radial
 - put whatever info into a reducer via saga & send to db
+    - user sends an input ->
+    - saga is triggered ->
+    - saga function sends a post to db ->
+    - 
