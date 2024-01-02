@@ -3,15 +3,34 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => {
+  const id = req.user.id
+
+  // selects latest session settings
+  const queryValues = [id]
+  const queryText = `
+    SELECT "session_settings".id, "intervals_selected", "playback_type"
+      FROM "session_settings"
+      JOIN "session"
+        ON "session".id = "session_settings".session_id
+      WHERE "user_id" = $1
+      ORDER BY "session_settings".id DESC
+      LIMIT 1;
+  `
+  pool.query(queryText, queryValues)
+    .then(result => {
+      res.send(result.rows[0])
+    })
+    .catch(err => {
+      console.error('Settings GET failed:', err)
+    })
 });
 
 router.post('/', (req, res) => {
-  // data to be sent to db
   const intervals = req.body.intervals.toString()
   const playback = req.body.playback
   const id = req.user.id
   // creates new session
-  const sessionQueryValues = [1]
+  const sessionQueryValues = [id]
   const sessionQueryText = `
     INSERT INTO "session" ("session_number", "user_id")
     VALUES (

@@ -2,13 +2,17 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 function* fetchSettings() {
-    // try {
-    //     const response = yield axios.get('/api/settings')
-    //     yield put({ type: 'SET_SETTINGS', payload: response.data})
-    // }
-    // catch (error) {
-    //     console.error('Settings GET request failed:', error)
-    // }
+    try {
+        const response = yield axios.get('/api/settings')
+        const reducerData = {
+            intervals: response.data.intervals_selected.split(','),
+            playback: response.data.playback_type
+        }
+        yield put({ type: 'SET_SETTINGS', payload: reducerData })
+    }
+    catch (error) {
+        console.error('Settings GET request failed:', error)
+    }
 }
 
 function* newSettings(action) {

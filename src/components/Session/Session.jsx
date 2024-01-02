@@ -1,8 +1,20 @@
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 function Session() {
 
     const history = useHistory()
+    const dispatch = useDispatch()
+
+    const settings = useSelector(store => store.settings)
+
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_SETTINGS'
+        })
+        console.log('settings:', settings)
+    }, [])
 
     const exit = () => {
         history.push('/home')
