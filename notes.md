@@ -1,5 +1,6 @@
 general to-do:
 - make routes inaccessible unless ongoing session
+- "random" random
 
 session options
 - (X) figure out button groups/mutiple button select..
@@ -12,6 +13,8 @@ session options
     - saga function sends a post to db ->
 
 session
-- () trigger sounds per question...
-- () figure out random interval selection
-- () POSTs to db for each question
+1. generate random number to choose interval
+2. playback interval according to settings
+3. answer checks if interval is correct
+   respond visually
+4. send answer to database
