@@ -18,3 +18,6 @@ session
 3. answer checks if interval is correct
    respond visually
 4. send answer to database
+
+still need to implement both ascending & descending
+figure out simultaneous notes and logic for harmonic setting

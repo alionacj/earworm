@@ -1,7 +1,8 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
-import { transpositionValues, getRandomInt, generateRandomNote } from "../../tools"
+import { transpositionValues, getRandomInt, generateRandomNote } from "./sessionTools"
+import { instrument, poly } from './instrument'
 import * as Tone from 'tone'
 
 
@@ -22,28 +23,42 @@ function Session() {
     const settings = useSelector(store => store.settings)
     const selectedIntervals = settings.intervals
     const playback = settings.playback
-
-    // audio logic
-    const synth = new Tone.Synth().toDestination()
-    let firstNote = 'C4'
-    let secondNote = Tone.Frequency(firstNote).transpose(transpositionValues)
+    const playbackOperator = () => {
+        switch (playback) {
+            case 'ascending':
+                return '+'
+                break;
+            case 'descending':
+                return '-'
+                break;
+            // defaulting to + but should be random!!
+            default: return '+'
+        }
+    }
 
     // question & answer logic
-    const question = () => {
-
+    const handleQuestion = () => {
         // randomly chooses interval from selections & provides numerical value
         let activeQuestion = selectedIntervals[getRandomInt(0, selectedIntervals.length-1)]
         let transpositionValue = transpositionValues[activeQuestion]
         
-        // generates random starting and transposed second note (based on interval)
+        // generates random starting and transposed second note based on current interval
         let firstNote = generateRandomNote()
-        let secondNote = Tone.Frequency(firstNote).transpose(transpositionValue)
+        let secondNote = Tone.Frequency(firstNote).transpose(`${playbackOperator()}${transpositionValue}`).toNote()
 
-        synth.triggerAttack(firstNote)
-        synth.setNote(secondNote, '+4n')
-        synth.triggerRelease('+2n')
+        // handles sound generation
+        if (playback === 'harmonic') {
+            poly.triggerAttackRelease([firstNote, secondNote], '4n')
+        } else {
+            instrument.triggerAttack(firstNote)
+            instrument.setNote(secondNote, '+4n')
+            instrument.triggerRelease('+2n')
+        }
+
+
     }
     const handleAnswer = (interval) => {
+
     }
 
     // navigation
