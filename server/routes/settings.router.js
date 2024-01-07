@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   // selects latest session settings
   const queryValues = [id]
   const queryText = `
-    SELECT "session_settings".id, "intervals_selected", "playback_type"
+    SELECT "session".id AS "session_id", "intervals_selected", "playback_type"
       FROM "session_settings"
       JOIN "session"
         ON "session".id = "session_settings".session_id

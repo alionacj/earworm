@@ -1,5 +1,6 @@
 // recieves settings in the form of:
 // {
+//   session_id: 32,
 //   intervals: ['U', 'm3'],
 //   playback: 'ascending'
 // }

@@ -2,22 +2,13 @@ general to-do:
 - make routes inaccessible unless ongoing session
 - "random" random
 
-session options
-- (X) figure out button groups/mutiple button select..
-    - looks like I can do this with MUI. I didnt want to do 
-      any styling but it might be necessary to install it now
-- (-) change playback to a radial
-- (X) put whatever info into a reducer via saga & send to db
-    - user sends an input ->
-    - saga is triggered ->
-    - saga function sends a post to db ->
+specific to-do:
 
-session
-1. generate random number to choose interval
-2. playback interval according to settings
-3. answer checks if interval is correct
-   respond visually
-4. send answer to database
-
-still need to implement both ascending & descending
-figure out simultaneous notes and logic for harmonic setting
+order of operations
+1. (X) generate a new question
+   (X) store that question in a reducer
+   buttons must be disabled before prompt
+2. recieve answers
+   store first answer in db
+   allow for correction with no dispatch
+3. next button creates new prompt

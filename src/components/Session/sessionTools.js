@@ -29,6 +29,6 @@ export function getRandomInt(min, max) {
 
 export function generateRandomNote() {
     let randomNote = notes[getRandomInt(0, 11)]
-    let randomOctave = getRandomInt(3, 6)
+    let randomOctave = getRandomInt(3, 5)
     return `${randomNote}${randomOctave}`
 }

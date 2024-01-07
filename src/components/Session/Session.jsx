@@ -23,29 +23,44 @@ function Session() {
     const settings = useSelector(store => store.settings)
     const selectedIntervals = settings.intervals
     const playback = settings.playback
+    const sessionId = settings.session_id
     const playbackOperator = () => {
         switch (playback) {
             case 'ascending':
                 return '+'
-                break;
             case 'descending':
                 return '-'
-                break;
-            // defaulting to + but should be random!!
-            default: return '+'
+            default:
+                let options = ['+', '-']
+                let result = options[getRandomInt(0,1)]
+            return result
         }
     }
 
-    // question & answer logic
-    const handleQuestion = () => {
+   let firstNote
+   let secondNote
+
+    // randomly selects interval and notes
+    const newQuestion = () => {
+
         // randomly chooses interval from selections & provides numerical value
         let activeQuestion = selectedIntervals[getRandomInt(0, selectedIntervals.length-1)]
         let transpositionValue = transpositionValues[activeQuestion]
-        
-        // generates random starting and transposed second note based on current interval
-        let firstNote = generateRandomNote()
-        let secondNote = Tone.Frequency(firstNote).transpose(`${playbackOperator()}${transpositionValue}`).toNote()
 
+        // generates random starting and transposed second note based on current interval
+        firstNote = generateRandomNote()
+        secondNote = Tone.Frequency(firstNote).transpose(`${playbackOperator()}${transpositionValue}`).toNote()
+
+        // sends data to server
+        dispatch({
+            type: 'NEW_INTERVAL',
+            payload: { interval: activeQuestion,
+                sessionId: sessionId }
+        })
+    }
+
+    // causes instrument to play 
+    const playInterval = () => {
         // handles sound generation
         if (playback === 'harmonic') {
             poly.triggerAttackRelease([firstNote, secondNote], '4n')
@@ -54,9 +69,8 @@ function Session() {
             instrument.setNote(secondNote, '+4n')
             instrument.triggerRelease('+2n')
         }
-
-
     }
+
     const handleAnswer = (interval) => {
 
     }
@@ -74,7 +88,7 @@ function Session() {
         <>
             <p>progress bar</p>
             {/* play switches to stop while playing */}
-            <button onClick={handleQuestion}>▶️</button>
+            <button onClick={playInterval}>▶️</button>
             <h3>SELECT ANSWER</h3>
             {selectedIntervals &&
             selectedIntervals.map(interval =>
@@ -88,6 +102,7 @@ function Session() {
             <button onClick={exit}>EXIT</button>
             {/* placeholder to review - will eventually move to next question */}
             <button onClick={next}>NEXT</button>
+            <button onClick={newQuestion}> STORE INTERVAL LOL</button>
         </>
     )
 }

@@ -5,6 +5,7 @@ function* fetchSettings() {
     try {
         const response = yield axios.get('/api/settings')
         const reducerData = {
+            session_id: response.data.session_id,
             intervals: response.data.intervals_selected.split(','),
             playback: response.data.playback_type
         }
