@@ -18,8 +18,21 @@ function* newInterval(action) {
     }
 }
 
+function* clearInterval(action) {
+    try {
+        yield put({
+            type: 'SET_INTERVAL',
+            data: ''
+        })
+    }
+    catch(error) {
+        console.error('Interval clear failed:', error)
+    }
+}
+
 function* intervalsSaga() {
     yield takeLatest('NEW_INTERVAL', newInterval)
+    yield takeLatest('CLEAR_INTERVAL', clearInterval)
 }
 
 export default intervalsSaga

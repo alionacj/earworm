@@ -44,6 +44,9 @@ function SessionOptions() {
                     playback: playbackSelection
                 }
             })
+            dispatch({
+                type: 'CLEAR_INTERVAL'
+            })
             history.push('/session')
         } else {
             alert('Please select at least two intervals to practice and a how you would like to hear them.')

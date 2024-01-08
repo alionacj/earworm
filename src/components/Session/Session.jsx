@@ -5,13 +5,20 @@ import { transpositionValues, getRandomInt, generateRandomNote } from "./session
 import { instrument, poly } from './instrument'
 import * as Tone from 'tone'
 
-
 function Session() {
 
     // hooks
     const history = useHistory()
     const dispatch = useDispatch()
 
+    // reducer data
+    const settings = useSelector(store => store.settings)
+    const latestInterval = useSelector(store => store.interval)
+    // variables derived from reducer data
+    const intervalsSelected = settings.intervalsSelected
+    const playbackType = settings.playbackType
+    const sessionId = settings.session_id
+    
     // gets latest settings from db
     useEffect(() => {
         dispatch({
@@ -19,33 +26,30 @@ function Session() {
         })
     }, [])
 
-    // settings data from reducer
-    const settings = useSelector(store => store.settings)
-    const selectedIntervals = settings.intervals
-    const playback = settings.playback
-    const sessionId = settings.session_id
-    const playbackOperator = () => {
-        switch (playback) {
-            case 'ascending':
-                return '+'
-            case 'descending':
-                return '-'
-            default:
-                let options = ['+', '-']
-                let result = options[getRandomInt(0,1)]
-            return result
-        }
-    }
-
-   let firstNote
-   let secondNote
+    // global variables used in playback
+    let firstNote
+    let secondNote
 
     // randomly selects interval and notes
     const newQuestion = () => {
 
         // randomly chooses interval from selections & provides numerical value
-        let activeQuestion = selectedIntervals[getRandomInt(0, selectedIntervals.length-1)]
-        let transpositionValue = transpositionValues[activeQuestion]
+        let currentInterval = intervalsSelected[getRandomInt(0, intervalsSelected.length-1)]
+        let transpositionValue = transpositionValues[currentInterval]
+
+        // selects + or - depending on playback
+        const playbackOperator = () => {
+            switch (playbackType) {
+                case 'ascending':
+                    return '+'
+                case 'descending':
+                    return '-'
+                default:
+                    let options = ['+', '-']
+                    let result = options[getRandomInt(0,1)]
+                return result
+            }
+        }
 
         // generates random starting and transposed second note based on current interval
         firstNote = generateRandomNote()
@@ -54,15 +58,15 @@ function Session() {
         // sends data to server
         dispatch({
             type: 'NEW_INTERVAL',
-            payload: { interval: activeQuestion,
+            payload: { interval: currentInterval,
                 sessionId: sessionId }
         })
     }
 
-    // causes instrument to play 
+    // causes instrument to play according to playback
     const playInterval = () => {
         // handles sound generation
-        if (playback === 'harmonic') {
+        if (playbackType === 'harmonic') {
             poly.triggerAttackRelease([firstNote, secondNote], '4n')
         } else {
             instrument.triggerAttack(firstNote)
@@ -80,31 +84,30 @@ function Session() {
         history.push('/home')
     }
     const next = () => {
-        history.push('/review')
     }
 
+    // loads first interval upon reducer retrieval
+    if(intervalsSelected) {
+        newQuestion()
+    }
 
     return (
         <>
             <p>progress bar</p>
-            {/* play switches to stop while playing */}
             <button onClick={playInterval}>▶️</button>
             <h3>SELECT ANSWER</h3>
-            {selectedIntervals &&
-            selectedIntervals.map(interval =>
+            {intervalsSelected &&
+            intervalsSelected.map(interval =>
                 <button
-                    key={selectedIntervals.indexOf(interval)}
+                    key={intervalsSelected.indexOf(interval)}
                     onClick={() => handleAnswer(interval)}
                 >
                     {interval}
                 </button>)}
             <br/><br/>
+            <button onClick={newQuestion}>NEXT</button>
             <button onClick={exit}>EXIT</button>
-            {/* placeholder to review - will eventually move to next question */}
-            <button onClick={next}>NEXT</button>
-            <button onClick={newQuestion}> STORE INTERVAL LOL</button>
         </>
-    )
-}
+    )}
 
 export default Session
