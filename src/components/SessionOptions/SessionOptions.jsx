@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { ToggleButtonGroup, ToggleButton } from "@mui/material"
 
@@ -11,10 +11,20 @@ function SessionOptions() {
 
     const intervals = ['U', 'm2', 'M2', 'm3', 'M3', 'P4', 'TT', 'P5', 'm6', 'M6', 'm7', 'M7', '8ve']
 
-    // input data stored here
-    const [ intervalSelection, setIntervalSelection ] = useState([])
-    const [ playbackSelection, setPlaybackSelection ] = useState(null)
-
+    // on launch
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_SETTINGS'
+        })
+    }, [])
+    
+    // settings reducer
+    const settings = useSelector(store => store.settings)
+    
+    // input data stored here, prepopulates with latest selections
+    const [ intervalSelection, setIntervalSelection ] = useState(settings.intervals)
+    const [ playbackSelection, setPlaybackSelection ] = useState(settings.playback)
+    
     // handles input changes
     const handleIntervalSelection = (e, newIntervalSelection) => {
         setIntervalSelection(newIntervalSelection)
@@ -23,7 +33,7 @@ function SessionOptions() {
         setPlaybackSelection(newPlaybackSetting)
     }
 
-    // populates reducer and db with latest settings used
+    // updates reducer and db with new settings
     // directs to active session
     const start = () => {
         if (intervalSelection.length > 1 && playbackSelection !== null) {

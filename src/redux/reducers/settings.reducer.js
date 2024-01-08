@@ -1,8 +1,8 @@
-// recieves settings in the form of:
+// stores settings in the form of:
 // {
 //   session_id: 32,
-//   intervals: ['U', 'm3'],
-//   playback: 'ascending'
+//   intervalsSelected: ['U', 'm3'],
+//   playbackType: 'ascending'
 // }
 
 const settingsReducer = (state = {}, action) => {

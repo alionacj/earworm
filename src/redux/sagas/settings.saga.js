@@ -6,8 +6,8 @@ function* fetchSettings() {
         const response = yield axios.get('/api/settings')
         const reducerData = {
             session_id: response.data.session_id,
-            intervals: response.data.intervals_selected.split(','),
-            playback: response.data.playback_type
+            intervalsSelected: response.data.intervals_selected.split(','),
+            playbackType: response.data.playback_type
         }
         yield put({ type: 'SET_SETTINGS', payload: reducerData })
     }
@@ -22,6 +22,9 @@ function* newSettings(action) {
             method: 'POST',
             url: '/api/settings',
             data: action.payload
+        })
+        yield put({
+            type: 'FETCH_SETTINGS'
         })
     }
     catch (error) {
