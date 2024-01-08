@@ -22,8 +22,8 @@ function SessionOptions() {
     const settings = useSelector(store => store.settings)
     
     // input data stored here, prepopulates with latest selections
-    const [ intervalSelection, setIntervalSelection ] = useState(settings.intervals)
-    const [ playbackSelection, setPlaybackSelection ] = useState(settings.playback)
+    const [ intervalSelection, setIntervalSelection ] = useState(settings.intervalsSelected)
+    const [ playbackSelection, setPlaybackSelection ] = useState(settings.playbackType)
     
     // handles input changes
     const handleIntervalSelection = (e, newIntervalSelection) => {
