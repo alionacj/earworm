@@ -1,22 +1,22 @@
 -- GENERAL --
 - make routes inaccessible unless ongoing session
-- "random" random
+
+-- BUGS --
+- reloading session sets current interval to undefined
 
 -- TASKS --
-options
-- (X) latest settings pre-selected
 session
 - (X) first question mounted on load
-- () store first answer in db
+- (X) store first answer in db
 - () respond visually
-- () allow for correction with no dispatch
-- () next button creates new prompt
+- (X) next button creates new prompt
 
 -- SCHEDULE --
 1. MONDAY
    () session logic & db communication 
 2. TUESDAY
    () styling
+   () transition animations
 3. WEDNESDAY
    () expand on sound options
 4. THURSDAY

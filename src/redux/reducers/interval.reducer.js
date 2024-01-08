@@ -1,7 +1,8 @@
 // stores intervals in the form of:
-// 'm3'
+// {interval: 'm3',
+//  id: 4}
 
-const intervalReducer = (state = '', action) => {
+const intervalReducer = (state = {}, action) => {
     if (action.type === 'SET_INTERVAL') {
         return action.data
     }
