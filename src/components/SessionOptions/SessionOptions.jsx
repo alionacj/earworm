@@ -21,10 +21,10 @@ function SessionOptions() {
     const settings = useSelector(store => store.settings)
 
     // handles input changes
-    const handleIntervalChange = (e, newInterval) => {
+    const handleIntervalChange = (e, newIntervals) => {
         dispatch({
             type: 'MODIFY_SETTINGS',
-            payload: newInterval,
+            payload: newIntervals,
             route: 'intervals'
         })
     }

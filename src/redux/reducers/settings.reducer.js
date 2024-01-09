@@ -11,10 +11,10 @@ const settingsReducer = (state = {}, action) => {
     }
     else if (action.type === 'MODIFY_SETTINGS') {
         if (action.route === 'intervals') {
-            return {...state, intervalsSelected: action.payload}
+            return {...state, intervals: action.payload}
         }
         else if (action.route === 'playback') {
-            return {...state, playbackType: action.payload}
+            return {...state, playback: action.payload}
         }
     }
     return state
