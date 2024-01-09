@@ -36,8 +36,8 @@ export function generateRandomNote() {
 }
 
 // selects + or - depending on playback
-export const playbackOperator = () => {
-    switch (playbackType) {
+export const playbackOperator = (playback) => {
+    switch (playback) {
         case 'ascending':
             return '+'
         case 'descending':

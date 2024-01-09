@@ -6,11 +6,14 @@
 //      sessionId: 4
 // }
 
-const intervalReducer = (state = {}, action) => {
-    if (action.type === 'SET_INTERVAL') {
+const prompt = (state = {}, action) => {
+    if (action.type === 'SET_PROMPT') {
         return action.data
+    }
+    else if (action.type === 'CLEAR_PROMPT') {
+        return {}
     }
     return state
 }
 
-export default intervalReducer
+export default prompt

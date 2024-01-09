@@ -17,7 +17,6 @@ function* fetchSettings() {
 }
 
 function* newSettings(action) {
-    console.log(action.payload)
     try {
         yield axios({
             method: 'POST',

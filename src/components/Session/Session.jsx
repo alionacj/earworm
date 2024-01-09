@@ -9,43 +9,39 @@ function Session() {
     // hooks
     const history = useHistory()
     const dispatch = useDispatch()
-
-    // mounts first question
-    useEffect(() => {
-        dispatch({
-            type: 'NEW_INTERVAL'
-        })
-    }, [])
     
     // reducers
     const settings = useSelector(store => store.settings)
-    const intervalReducer = useSelector(store => store.interval)
+    const prompt = useSelector(store => store.prompt)
 
     // generates interval, notes, and stores in db
-    const newQuestion = () => {
-        let operator = playbackOperator(playbackType)
+    const newPrompt = () => {
+        let operator = playbackOperator(settings.playback)
         dispatch({
-            type: 'NEW_INTERVAL',
-            payload: {
-                settings,
-                operator
-            }
+            type: 'NEW_PROMPT',
+            payload: settings,
+            operator: operator
         })
     }
 
+    // mounts first question
+    useEffect(() => {
+        newPrompt()
+    }, [])
+
     // handles sound generation according to playback
     const playInterval = () => {
-        if (playbackType === 'harmonic') {
-            poly.triggerAttackRelease([firstNote, secondNote], '4n')
+        if (settings.playback === 'harmonic') {
+            poly.triggerAttackRelease([prompt.firstNote, prompt.secondNote], '4n')
         } else {
-            instrument.triggerAttack(`${firstNote}`)
-            instrument.setNote(`${secondNote}`, '+4n')
+            instrument.triggerAttack(`${prompt.firstNote}`)
+            instrument.setNote(`${prompt.secondNote}`, '+4n')
             instrument.triggerRelease('+2n')
         }
     }
 
     const handleAnswer = (interval) => {
-        if (interval === intervalReducer.interval) {
+        if (interval === prompt.interval) {
             console.log('correct')
             // dispatch({
             //     type: 'STORE_ANSWER',
@@ -88,7 +84,7 @@ function Session() {
                     </button>)}
             <br/><br/>
             <button onClick={exit}>EXIT</button>
-            <button onClick={newQuestion}>NEXT</button>
+            <button onClick={newPrompt}>NEXT</button>
         </>
     )}
 

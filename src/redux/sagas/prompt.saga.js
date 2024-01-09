@@ -3,11 +3,11 @@ import { put, takeLatest } from 'redux-saga/effects'
 import * as Tone from 'tone'
 import { transpositionValues, getRandomInt, generateRandomNote } from "../../tools"
 
-function* newInterval(action) {
+function* newPrompt(action) {
 
     // parsing action
-    const intervals = action.payload.settingsReducer.intervalsSelected
-    const operator = action.payload.operator
+    const intervals = action.payload.intervals
+    const operator = action.operator
     const sessionId = action.payload.sessionId
 
     // randomly chooses interval from selections & provides transposition number
@@ -28,7 +28,7 @@ function* newInterval(action) {
             }
         })
         yield put({
-            type: 'SET_INTERVAL',
+            type: 'SET_PROMPT',
             data: {
                 interval: currentInterval,
                 firstNote: firstNote,
@@ -39,6 +39,7 @@ function* newInterval(action) {
     catch(error) {
         console.error('Interval POST failed:', error)
     }
+    
 }
 
 function* storeAnswer(action) {
@@ -54,22 +55,9 @@ function* storeAnswer(action) {
     }
 }
 
-function* clearInterval(action) {
-    try {
-        yield put({
-            type: 'SET_INTERVAL',
-            data: ''
-        })
-    }
-    catch(error) {
-        console.error('Interval clear failed:', error)
-    }
-}
-
 function* intervalsSaga() {
-    yield takeLatest('NEW_INTERVAL', newInterval)
+    yield takeLatest('NEW_PROMPT', newPrompt)
     yield takeLatest('STORE_ANSWER', storeAnswer)
-    yield takeLatest('CLEAR_INTERVAL', clearInterval)
 }
 
 export default intervalsSaga
