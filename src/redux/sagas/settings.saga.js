@@ -3,11 +3,11 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* fetchSettings() {
     try {
-        const response = yield axios.get('/api/settings')
+        const response = yield axios.get(`/api/settings/`)
         const reducerData = {
-            session_id: response.data.session_id,
-            intervalsSelected: response.data.intervals_selected.split(','),
-            playbackType: response.data.playback_type
+            sessionId: response.data.session_id,
+            intervals: response.data.intervals_selected.split(','),
+            playback: response.data.playback_type
         }
         yield put({ type: 'SET_SETTINGS', payload: reducerData })
     }
@@ -17,15 +17,14 @@ function* fetchSettings() {
 }
 
 function* newSettings(action) {
+    console.log(action.payload)
     try {
         yield axios({
             method: 'POST',
             url: '/api/settings',
             data: action.payload
         })
-        yield put({
-            type: 'FETCH_SETTINGS'
-        })
+        yield action.history.push('/session')
     }
     catch (error) {
         console.error('Settings POST request failed:', error)

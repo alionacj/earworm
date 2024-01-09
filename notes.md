@@ -2,7 +2,7 @@
 - make routes inaccessible unless ongoing session
 
 -- BUGS --
-- reloading session sets current interval to undefined
+- 
 
 -- TASKS --
 session

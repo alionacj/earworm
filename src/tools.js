@@ -2,6 +2,8 @@
 // NO FLATS ONLY SHARPS
 export const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 
+export const intervals = ['U', 'm2', 'M2', 'm3', 'M3', 'P4', 'TT', 'P5', 'm6', 'M6', 'm7', 'M7', '8ve']
+
 // numerical value for each interval
 // can be used directly by tone.js
 export const transpositionValues = {
@@ -31,4 +33,18 @@ export function generateRandomNote() {
     let randomNote = notes[getRandomInt(0, 11)]
     let randomOctave = getRandomInt(3, 5)
     return `${randomNote}${randomOctave}`
+}
+
+// selects + or - depending on playback
+export const playbackOperator = () => {
+    switch (playbackType) {
+        case 'ascending':
+            return '+'
+        case 'descending':
+            return '-'
+        default:
+            let options = ['+', '-']
+            let result = options[getRandomInt(0,1)]
+        return result
+    }
 }

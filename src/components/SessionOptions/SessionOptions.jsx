@@ -10,42 +10,41 @@ function SessionOptions() {
     const history = useHistory()
     const dispatch = useDispatch()
 
-    // settings reducer
-    const settings = useSelector(store => store.settings)
-
-    // input data stored here
-    const [ intervalSelection, setIntervalSelection ] = useState([])
-    const [ playbackSelection, setPlaybackSelection ] = useState('')
-
-    // handles input changes
-    const handleIntervalSelection = (e, newIntervalSelection) => {
-        setIntervalSelection(newIntervalSelection)
-    }
-    const handlePlaybackSelection = (e, newPlaybackSetting) => {
-        setPlaybackSelection(newPlaybackSetting)
-    }
-    
-    // on launch
+    // loads latest settings on launch
     useEffect(() => {
         dispatch({
             type: 'FETCH_SETTINGS'
         })
-        setIntervalSelection(settings.intervalsSelected)
-        setPlaybackSelection(settings.playbackType)
     }, [])
 
+    // settings reducer
+    const settings = useSelector(store => store.settings)
+
+    // handles input changes
+    const handleIntervalChange = (e, newInterval) => {
+        dispatch({
+            type: 'MODIFY_SETTINGS',
+            payload: newInterval,
+            route: 'intervals'
+        })
+    }
+    const handlePlaybackChange = (e, newPlayback) => {
+        dispatch({
+            type: 'MODIFY_SETTINGS',
+            payload: newPlayback,
+            route: 'playback'
+        })
+    }
+
     // updates reducer and db with new settings
-    // directs to active session
+    // directs to active session (in saga)
     const start = () => {
-        if (intervalSelection.length > 1 && playbackSelection !== null) {
+        if (settings.intervals.length > 1 && settings.playback !== null) {
             dispatch({
                 type: 'NEW_SETTINGS',
-                payload: {
-                    intervals: intervalSelection,
-                    playback: playbackSelection
-                }
+                payload: settings,
+                history: history
             })
-            history.push('/session')
         } else {
             alert('Please select at least two intervals to practice and a how you would like to hear them.')
         }
@@ -58,12 +57,11 @@ function SessionOptions() {
 
     
     return (
-        settings.intervalsSelected &&
         <>
             <h3>SELECT INTERVALS</h3>
                 <ToggleButtonGroup
-                    value={intervalSelection || settings.intervalsSelected}
-                    onChange={handleIntervalSelection}
+                    value={settings.intervals}
+                    onChange={handleIntervalChange}
                     >
                         {intervals.map((interval) => (
                         <ToggleButton
@@ -76,8 +74,8 @@ function SessionOptions() {
             <h3>PRACTICE OPTIONS</h3>
                 <ToggleButtonGroup
                     exclusive
-                    value={playbackSelection || settings.playbackType}
-                    onChange={handlePlaybackSelection}
+                    value={settings.playback}
+                    onChange={handlePlaybackChange}
                 >
                     <ToggleButton value={'ascending'}>Ascending</ToggleButton>
                     <ToggleButton value={'descending'}>Descending</ToggleButton>
