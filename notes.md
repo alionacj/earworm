@@ -6,10 +6,9 @@
 
 -- TASKS --
 session
-- (X) first question mounted on load
-- (X) store first answer in db
 - () respond visually
-- (X) next button creates new prompt
+- total questions and progress bar
+- button conditionally disabled
 
 -- SCHEDULE --
 1. MONDAY
