@@ -19,7 +19,7 @@ import Information from '../Information/Information';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
-import SessionOptions from '../SessionOptions/SessionOptions';
+import SessionSettings from '../SessionSettings/SessionSettings';
 import Session from '../Session/Session';
 import SessionReview from '../SessionReview/SessionReview';
 import SessionHistory from '../SessionHistory/SessionHistory';
@@ -72,7 +72,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/options">
-            <SessionOptions />
+            <SessionSettings />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/session">
