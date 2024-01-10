@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState} from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
-import { playbackOperator } from "../../tools"
+import { playbackOperator } from '../../tools'
 import { instrument, poly } from './instrument'
 
 import './Session.css'
