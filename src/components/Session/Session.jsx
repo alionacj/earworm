@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { playbackOperator } from "../../tools"
 import { instrument, poly } from './instrument'
 
+import './Session.css'
+
 function Session() {
 
     // hooks
@@ -14,6 +16,9 @@ function Session() {
     const settings = useSelector(store => store.settings)
     const prompt = useSelector(store => store.prompt)
 
+    // local state
+    const [progress, setProgress] = useState(0)
+
     // generates interval, notes, and stores in db
     const newPrompt = () => {
         let operator = playbackOperator(settings.playback)
@@ -22,11 +27,17 @@ function Session() {
             payload: settings,
             operator: operator
         })
+        setProgress(progress+1)
     }
 
     // mounts first question
     useEffect(() => {
-        newPrompt()
+        let operator = playbackOperator(settings.playback)
+        dispatch({
+            type: 'NEW_PROMPT',
+            payload: settings,
+            operator: operator
+        })
     }, [])
 
     // handles sound generation according to playback
@@ -43,36 +54,42 @@ function Session() {
     const handleAnswer = (interval) => {
         if (interval === prompt.interval) {
             console.log('correct')
-            // dispatch({
-            //     type: 'STORE_ANSWER',
-            //     payload: {
-            //         is_correct: true,
-            //         id: intervalReducer.id
-            //     }
-            // })
+            dispatch({
+                type: 'STORE_ANSWER',
+                payload: {
+                    is_correct: true,
+                    id: prompt.id
+                }
+            })
         }
         else {
             console.log('incorrect')
-            // dispatch({
-            //     type: 'STORE_ANSWER',
-            //     payload: {
-            //         is_correct: false,
-            //         id: intervalReducer.id
-            //     }
-            // })
+            dispatch({
+                type: 'STORE_ANSWER',
+                payload: {
+                    is_correct: false,
+                    id: prompt.id
+                }
+            })
         }
     }
 
     // navigation
+    const next = () => {
+        if (progress === 10) {
+            history.push('/review')
+        } else {
+            newPrompt()
+        }
+    }
     const exit = () => {
         history.push('/home')
-    }
-    const next = () => {
     }
 
     return (
         <>
-            <p>progress bar</p>
+            <progress value={progress} max={10}/>
+            <br/><br/>
             <button onClick={playInterval}>▶️</button>
             <h3>SELECT ANSWER</h3>
                 {settings.intervals.map(interval =>
@@ -84,8 +101,9 @@ function Session() {
                     </button>)}
             <br/><br/>
             <button onClick={exit}>EXIT</button>
-            <button onClick={newPrompt}>NEXT</button>
+            <button onClick={next}>NEXT</button>
         </>
-    )}
+    )
+}
 
 export default Session

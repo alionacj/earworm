@@ -1,8 +1,11 @@
+import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 function SessionReview() {
 
     const history = useHistory()
+
+    const settings = useSelector(store => store.settings)
 
     const exit = () => {
         history.push('/home')
@@ -10,7 +13,7 @@ function SessionReview() {
     const retry = () => {
         history.push('/session')
     }
-    const pastSessions = () => {
+    const viewHistory = () => {
         history.push('/history')
     }
 
@@ -19,13 +22,12 @@ function SessionReview() {
             <h3>REVIEW</h3>
             <div>
                 <p>SESSION X COMPLETED</p>
-                <p>AVERAGE CORRECT: X%</p>
-                <p>HIGHEST SCORING: X X%</p>
-                <p>LOWEST SCORING: X X%</p>
-                <p>interval scores dropdown</p>
-                <button onClick={pastSessions}>VIEW SESSIONS</button>
+                <p>SCORE: X/10</p>
+                <p>X: 4/4</p>
+                <p>X: 3/6</p>
+                <button onClick={viewHistory}>VIEW HISTORY</button>
             </div>
-                <br></br><br></br>
+                <br></br>
             <button onClick={exit}>EXIT</button>
             <button onClick={retry}>RETRY</button>
         </>
