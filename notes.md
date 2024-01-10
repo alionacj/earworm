@@ -26,3 +26,24 @@ review
    () shore up loose ends
 5. FRIDAY
    () final touches
+
+
+total stats page will show:
+- number sessions completed
+   - need to account for incomplete
+- total correct %
+- every interval & percentage correct
+- session history link
+
+session history will show:
+- dropdown for each session containing:
+   - session #
+   - total score
+   - intervals tested and score for each
+
+   ^ and v both use same data. can draw from reducer
+
+session complete page will show:
+- session #
+- total score
+- interval tested and score for each
