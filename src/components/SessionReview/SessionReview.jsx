@@ -11,7 +11,11 @@ function SessionReview() {
         dispatch({
             type: 'FETCH_HISTORY'
         })
-    })
+    }, [])
+    
+    // const userHistory = useSelector(store => store.history)
+    // const latestSession = userHistory[0]
+    // const sessionNumber = latestSession.session_number
 
     const exit = () => {
         history.push('/home')
@@ -27,10 +31,8 @@ function SessionReview() {
         <>
             <h3>REVIEW</h3>
             <div>
-                <p>SESSION X COMPLETED</p>
+                <p>SESSION  COMPLETED</p>
                 <p>SCORE: X/10</p>
-                <p>X: 4/4</p>
-                <p>X: 3/6</p>
                 <button onClick={viewHistory}>VIEW HISTORY</button>
             </div>
                 <br></br>

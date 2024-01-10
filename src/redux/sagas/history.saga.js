@@ -5,6 +5,10 @@ function* fetchHistory() {
     try {
         const response = yield axios.get('/api/history')
         yield console.log(response.data)
+        // yield put({
+        //     type: 'SET_HISTORY',
+        //     payload: response.data
+        // })
     }
     catch(error) {
         console.error('History GET request failed:', error)

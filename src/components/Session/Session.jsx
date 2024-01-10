@@ -55,22 +55,14 @@ function Session() {
         if (interval === prompt.interval) {
             console.log('correct')
             dispatch({
-                type: 'STORE_ANSWER',
+                type: 'MARK_CORRECT',
                 payload: {
-                    is_correct: true,
-                    id: prompt.id
+                    intervalId: prompt.id
                 }
             })
         }
         else {
             console.log('incorrect')
-            dispatch({
-                type: 'STORE_ANSWER',
-                payload: {
-                    is_correct: false,
-                    id: prompt.id
-                }
-            })
         }
     }
 
