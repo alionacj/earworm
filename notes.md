@@ -1,13 +1,28 @@
-general to-do:
+-- GENERAL --
 - make routes inaccessible unless ongoing session
 
-session options
-- (X) figure out button groups/mutiple button select..
-    - looks like I can do this with MUI. I didnt want to do 
-      any styling but it might be necessary to install it now
-- (-) change playback to a radial
-- put whatever info into a reducer via saga & send to db
-    - user sends an input ->
-    - saga is triggered ->
-    - saga function sends a post to db ->
-    - 
+-- BUGS --
+- 
+
+-- TASKS --
+session
+- () respond visually
+- total questions and progress bar
+- button conditionally disabled
+review
+- retrieve db info on mount
+- 
+
+-- SCHEDULE --
+1. MONDAY
+   () session logic & db communication 
+2. TUESDAY
+   () styling
+   () transition animations
+3. WEDNESDAY
+   () expand on sound options
+4. THURSDAY
+   () review and take stock
+   () shore up loose ends
+5. FRIDAY
+   () final touches
