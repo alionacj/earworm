@@ -4,6 +4,11 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { playbackOperator } from '../../tools'
 import { instrument, poly } from './instrument'
 
+import ExitButton from "../Buttons/ExitButton"
+import NextButton from "../Buttons/NextButton"
+
+import { Button, LinearProgress } from "@mui/material"
+
 import './Session.css'
 
 function Session() {
@@ -27,7 +32,7 @@ function Session() {
             payload: settings,
             operator: operator
         })
-        setProgress(progress+1)
+        setProgress(progress+10)
     }
 
     // mounts first question
@@ -66,34 +71,24 @@ function Session() {
         }
     }
 
-    // navigation
-    const next = () => {
-        if (progress === 10) {
-            history.push('/review')
-        } else {
-            newPrompt()
-        }
-    }
-    const exit = () => {
-        history.push('/home')
-    }
-
     return (
+        settings &&
         <>
-            <progress value={progress} max={10}/>
+            <LinearProgress variant="determinate" value={progress} max={100}/>
             <br/><br/>
-            <button onClick={playInterval}>▶️</button>
+            <Button variant="contained" onClick={playInterval}>▶️</Button>
             <h3>SELECT ANSWER</h3>
                 {settings.intervals.map(interval =>
-                    <button
+                    <Button
+                        variant="outlined"
                         key={settings.intervals.indexOf(interval)}
                         onClick={() => handleAnswer(interval)}
                     >
                         {interval}
-                    </button>)}
+                    </Button>)}
             <br/><br/>
-            <button onClick={exit}>EXIT</button>
-            <button onClick={next}>NEXT</button>
+            <ExitButton />
+            <NextButton progress={progress} newPrompt={newPrompt}/>
         </>
     )
 }

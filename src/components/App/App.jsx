@@ -12,17 +12,14 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import Header from '../Header/Header';
 
-import HomePage from '../HomePage/HomePage';
-import Statistics from '../Statistics/Statistics';
-import Information from '../Information/Information';
-
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+import HomePage from '../HomePage/HomePage';
+import Statistics from '../Statistics/Statistics';
+
 import SessionSettings from '../SessionSettings/SessionSettings';
 import Session from '../Session/Session';
-import SessionReview from '../SessionReview/SessionReview';
-import SessionHistory from '../SessionHistory/SessionHistory';
 
 import './App.css';
 
@@ -79,20 +76,8 @@ function App() {
             <Session />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/review">
-            <SessionReview />
-          </ProtectedRoute>
-
-          <ProtectedRoute exact path="/history">
-            <SessionHistory />
-          </ProtectedRoute>
-
           <ProtectedRoute exact path="/stats">
             <Statistics />
-          </ProtectedRoute>
-
-          <ProtectedRoute exact path="/info">
-            <Information />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

@@ -3,22 +3,22 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import { Button } from '@mui/material';
 
-function StartSessionButton() {
+function ExitButton() {
 
     const history = useHistory()
 
-    const startSession = () => {
-        history.push('/options')
+    const exit = () => {
+        history.push('/home')
     }
 
     return (
         <Button
             variant="contained"
-            onClick={startSession}
+            onClick={exit}
         >
-                Start
+                MENU
         </Button>
     )
 }
 
-export default StartSessionButton
+export default ExitButton

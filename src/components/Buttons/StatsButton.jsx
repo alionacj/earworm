@@ -3,22 +3,22 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import { Button } from '@mui/material';
 
-function StartSessionButton() {
+function StatsButton() {
 
     const history = useHistory()
 
-    const startSession = () => {
-        history.push('/options')
+    const viewStats = () => {
+        history.push('/stats')
     }
 
     return (
         <Button
             variant="contained"
-            onClick={startSession}
+            onClick={viewStats}
         >
-                Start
+                Stats
         </Button>
     )
 }
 
-export default StartSessionButton
+export default StatsButton

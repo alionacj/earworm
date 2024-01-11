@@ -2,7 +2,12 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { intervals } from "../../tools"
+
+import ExitButton from "../Buttons/ExitButton"
+import StartButton from "../Buttons/StartButton"
+
 import { ToggleButtonGroup, ToggleButton } from "@mui/material"
+
 
 function SessionOptions() {
 
@@ -49,11 +54,6 @@ function SessionOptions() {
             alert('Please select at least two intervals to practice and a how you would like to hear them.')
         }
     }
-    
-    // directs home
-    const exit = () => {
-        history.push('/home')
-    }
 
     
     return (
@@ -83,8 +83,8 @@ function SessionOptions() {
                 </ToggleButtonGroup>
             <h3>SELECT SOUND</h3>
                 <p>dropdown</p>
-            <button onClick={exit}>EXIT</button>
-            <button onClick={start}>START</button>
+            <ExitButton />
+            <StartButton settings={settings}/>
         </>
     )
 }

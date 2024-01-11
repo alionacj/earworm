@@ -3,22 +3,22 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import { Button } from '@mui/material';
 
-function StartSessionButton() {
+function RetryButton() {
 
     const history = useHistory()
 
-    const startSession = () => {
-        history.push('/options')
+    const retry = () => {
+
     }
 
     return (
         <Button
             variant="contained"
-            onClick={startSession}
+            onClick={retry}
         >
-                Start
+                Retry
         </Button>
     )
 }
 
-export default StartSessionButton
+export default RetryButton
