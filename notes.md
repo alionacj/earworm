@@ -9,9 +9,6 @@ session
 - () respond visually
 - total questions and progress bar
 - button conditionally disabled
-review
-- retrieve db info on mount
-- 
 
 -- SCHEDULE --
 1. MONDAY
