@@ -42,7 +42,7 @@ function* newPrompt(action) {
     
 }
 
-function* storeAnswer(action) {
+function* markCorrect(action) {
     try {
         yield axios({
             method: 'PUT',
@@ -57,7 +57,7 @@ function* storeAnswer(action) {
 
 function* intervalsSaga() {
     yield takeLatest('NEW_PROMPT', newPrompt)
-    yield takeLatest('STORE_ANSWER', storeAnswer)
+    yield takeLatest('MARK_CORRECT', markCorrect)
 }
 
 export default intervalsSaga

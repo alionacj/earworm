@@ -23,6 +23,7 @@ function* newSettings(action) {
             url: '/api/settings',
             data: action.payload
         })
+        yield put({ type: 'FETCH_SETTINGS' })
         yield action.history.push('/session')
     }
     catch (error) {

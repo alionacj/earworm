@@ -32,11 +32,10 @@ router.put('/', (req, res) => {
   // only updates on first attempt
   const query = `
     UPDATE "session_intervals"
-      SET "is_correct" = $1
-      WHERE "id" = $2
-        AND "is_correct" IS NULL;
+      SET "is_correct" = true
+      WHERE "id" = $1
   `
-  const values = [req.body.is_correct, req.body.id]
+  const values = [req.body.intervalId]
   pool.query(query, values)
     .then(result => {
       res.sendStatus(201)

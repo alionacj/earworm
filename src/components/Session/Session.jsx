@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState} from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
-import { playbackOperator } from "../../tools"
+import { playbackOperator } from '../../tools'
 import { instrument, poly } from './instrument'
 
 import './Session.css'
@@ -55,22 +55,14 @@ function Session() {
         if (interval === prompt.interval) {
             console.log('correct')
             dispatch({
-                type: 'STORE_ANSWER',
+                type: 'MARK_CORRECT',
                 payload: {
-                    is_correct: true,
-                    id: prompt.id
+                    intervalId: prompt.id
                 }
             })
         }
         else {
             console.log('incorrect')
-            dispatch({
-                type: 'STORE_ANSWER',
-                payload: {
-                    is_correct: false,
-                    id: prompt.id
-                }
-            })
         }
     }
 
