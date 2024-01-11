@@ -1,6 +1,5 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
-
-import LogOutButton from "../LogOutButton/LogOutButton"
+import LogOutButton from "../Buttons/LogOutButton"
 
 function HomePage () {
 

@@ -1,5 +1,5 @@
 -- GENERAL --
-- make routes inaccessible unless ongoing session
+- make routes inaccessible unless current spot in ongoing session
 
 -- BUGS --
 - 
@@ -7,7 +7,6 @@
 -- TASKS --
 session
 - () respond visually
-- total questions and progress bar
 - button conditionally disabled
 
 -- SCHEDULE --
