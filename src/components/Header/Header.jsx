@@ -1,6 +1,18 @@
+import { Typography } from "@mui/material"
+
 function Header() {
     return(
-        <h2>EARWORM</h2>
+        <>
+            <Typography
+                variant='h3'
+                align='center'
+                sx={{
+                    color: 'white'
+                }}
+            >
+                EARWORM
+            </Typography>
+        </>
     )
 }
 

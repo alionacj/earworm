@@ -6,8 +6,9 @@ import { instrument, poly } from './instrument'
 
 import ExitButton from "../Buttons/ExitButton"
 import NextButton from "../Buttons/NextButton"
+import AnswerButton from "../Buttons/AnswerButton"
 
-import { Button, LinearProgress } from "@mui/material"
+import { Button, LinearProgress, Box } from "@mui/material"
 
 import './Session.css'
 
@@ -23,6 +24,8 @@ function Session() {
 
     // local state
     const [progress, setProgress] = useState(0)
+    const [isAnswered, setIsAnswered] = useState(false)
+    const [isCorrect, setIsCorrect] = useState('')
 
     // generates interval, notes, and stores in db
     const newPrompt = () => {
@@ -33,6 +36,7 @@ function Session() {
             operator: operator
         })
         setProgress(progress+10)
+        setIsCorrect('')
     }
 
     // mounts first question
@@ -56,39 +60,32 @@ function Session() {
         }
     }
 
-    const handleAnswer = (interval) => {
-        if (interval === prompt.interval) {
-            console.log('correct')
-            dispatch({
-                type: 'MARK_CORRECT',
-                payload: {
-                    intervalId: prompt.id
-                }
-            })
-        }
-        else {
-            console.log('incorrect')
-        }
-    }
-
     return (
         settings &&
         <>
+            <br/><br/>
             <LinearProgress variant="determinate" value={progress} max={100}/>
             <br/><br/>
             <Button variant="contained" onClick={playInterval}>▶️</Button>
             <h3>SELECT ANSWER</h3>
-                {settings.intervals.map(interval =>
-                    <Button
-                        variant="outlined"
+                {settings.intervals.map(interval => (
+                    <AnswerButton
                         key={settings.intervals.indexOf(interval)}
-                        onClick={() => handleAnswer(interval)}
+                        interval={interval}
+                        setIsAnswered={setIsAnswered}
+                        setIsCorrect={setIsCorrect}
+                        prompt={prompt}
                     >
-                        {interval}
-                    </Button>)}
+                    </AnswerButton>))}
+                    <br></br>
+                    {isCorrect}
             <br/><br/>
             <ExitButton />
-            <NextButton progress={progress} newPrompt={newPrompt}/>
+            <NextButton
+                progress={progress}
+                isAnswered={isAnswered}
+                setIsAnswered={setIsAnswered}
+                newPrompt={newPrompt}/>
         </>
     )
 }

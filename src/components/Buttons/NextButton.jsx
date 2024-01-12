@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import { Button } from '@mui/material';
 
-function NextButton({ progress, newPrompt }) {
+function NextButton({ progress, isAnswered, setIsAnswered, newPrompt }) {
 
     const history = useHistory()
 
@@ -11,12 +11,14 @@ function NextButton({ progress, newPrompt }) {
         if (progress === 100) {
             history.push('/stats')
         } else {
+            setIsAnswered(false)
             newPrompt()
         }
     }
 
     return (
         <Button
+            disabled={!isAnswered}
             variant="contained"
             onClick={next}
         >

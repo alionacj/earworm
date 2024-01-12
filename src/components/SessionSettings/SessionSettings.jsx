@@ -6,7 +6,7 @@ import { intervals } from "../../tools"
 import ExitButton from "../Buttons/ExitButton"
 import StartButton from "../Buttons/StartButton"
 
-import { ToggleButtonGroup, ToggleButton } from "@mui/material"
+import { ToggleButtonGroup, ToggleButton, Container } from "@mui/material"
 
 
 function SessionOptions() {
@@ -59,18 +59,20 @@ function SessionOptions() {
     return (
         <>
             <h3>SELECT INTERVALS</h3>
-                <ToggleButtonGroup
-                    value={settings.intervals}
-                    onChange={handleIntervalChange}
-                    >
-                        {intervals.map((interval) => (
-                        <ToggleButton
-                            key={intervals.indexOf(interval)}
-                            value={interval}
-                            >
-                                {interval}
-                            </ToggleButton>))}
-                </ToggleButtonGroup>
+                <Container>
+                    <ToggleButtonGroup
+                        value={settings.intervals}
+                        onChange={handleIntervalChange}
+                        >
+                            {intervals.map((interval) => (
+                            <ToggleButton
+                                key={intervals.indexOf(interval)}
+                                value={interval}
+                                >
+                                    {interval}
+                                </ToggleButton>))}
+                    </ToggleButtonGroup>
+                </Container>
             <h3>PRACTICE OPTIONS</h3>
                 <ToggleButtonGroup
                     exclusive

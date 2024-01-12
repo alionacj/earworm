@@ -21,6 +21,8 @@ import Statistics from '../Statistics/Statistics';
 import SessionSettings from '../SessionSettings/SessionSettings';
 import Session from '../Session/Session';
 
+import { Container, Box } from '@mui/material';
+
 import './App.css';
 
 
@@ -35,58 +37,69 @@ function App() {
 
   return (
     <Router>
-      <div>
-        <Header />
+        <Box 
+          id="header"
+          sx={{
+            height: '12.5%',
+            bgcolor:' #427df0',
+            boxShadow: 2
+          }}
+        >
+          <Header />
+        </Box>
 
-        <Switch>
-          {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/login" />
+      <Container>
+        <Box>
+          <Switch>
+            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+            <Redirect exact from="/" to="/login" />
 
-          <Route exact path="/login">
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect to the /user page
-              <Redirect to="/home" />
-              :
-              // Otherwise, show the login page
-              <LoginPage />
-            }
-          </Route>
+            <Route exact path="/login">
+              {user.id ?
+                // If the user is already logged in, 
+                // redirect to the /user page
+                <Redirect to="/home" />
+                :
+                // Otherwise, show the login page
+                <LoginPage />
+              }
+            </Route>
 
-          <Route exact path="/registration">
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/home" />
-              :
-              // Otherwise, show the registration page
-              <RegisterPage />
-            }
-          </Route>
+            <Route exact path="/registration">
+              {user.id ?
+                // If the user is already logged in, 
+                // redirect them to the /user page
+                <Redirect to="/home" />
+                :
+                // Otherwise, show the registration page
+                <RegisterPage />
+              }
+            </Route>
 
-          <ProtectedRoute exact path="/home">
-            <HomePage />
-          </ProtectedRoute>
+            <ProtectedRoute exact path="/home">
+              <HomePage />
+            </ProtectedRoute>
 
-          <ProtectedRoute exact path="/options">
-            <SessionSettings />
-          </ProtectedRoute>
+            <ProtectedRoute exact path="/options">
+              <SessionSettings />
+            </ProtectedRoute>
 
-          <ProtectedRoute exact path="/session">
-            <Session />
-          </ProtectedRoute>
+            <ProtectedRoute exact path="/session">
+              <Session />
+            </ProtectedRoute>
 
-          <ProtectedRoute exact path="/stats">
-            <Statistics />
-          </ProtectedRoute>
+            <ProtectedRoute exact path="/stats">
+              <Statistics />
+            </ProtectedRoute>
 
-          {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
-            <h1>404</h1>
-          </Route>
-          
-        </Switch>
-      </div>
+            {/* If none of the other routes matched, we will show a 404. */}
+            <Route>
+              <h1>404</h1>
+            </Route>
+            
+          </Switch>
+        </Box>
+      </Container>
     </Router>
   );
 }

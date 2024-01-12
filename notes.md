@@ -1,31 +1,22 @@
--- GENERAL --
-- make routes inaccessible unless current spot in ongoing session
 
--- BUGS --
-- 
+-- TO-DOs --
 
--- TASKS --
-session
-- () respond visually
-- button conditionally disabled
-statistics
+routes inaccessible unless current spot in session
+
+render db information in stats page
 - total score
-- accordions collapse/expand depening on each other
-- individual interval total scores
-- only latest session accordion open by default
-- session retry button
+- interval scores
 
+session retry button
 
--- SCHEDULE --
-1. MONDAY
-   () session logic & db communication 
-2. TUESDAY
-   () styling
-   () transition animations
-3. WEDNESDAY
-   () expand on sound options
-4. THURSDAY
-   () review and take stock
-   () shore up loose ends
-5. FRIDAY
-   () final touches
+finish styling
+- visual response to answer
+- accordions collapse/expand depending on each other
+- latest session open by default
+- progress bar
+
+add transition fades
+
+expand on sound options
+
+new user experience
