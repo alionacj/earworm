@@ -2,13 +2,12 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
-router.get('/', (req, res) => {
-  // GET route code here
-});
+// there is no GET route because the history router
+  // contains interval data
 
+// adds an interval and its session id
+// is_correct defaults to false - if the user
+  // navigates away they get the question wrong
 router.post('/', (req, res) => {
   const interval = req.body.interval
   const sessionId = req.body.sessionId
@@ -20,6 +19,8 @@ router.post('/', (req, res) => {
   const values = [interval, sessionId]
   pool.query(query, values)
     .then(result => {
+        // sends back interval id which
+          // will be stored in the prompt
         res.send({id: result.rows[0].id})
     })
     .catch(error => {
@@ -28,8 +29,11 @@ router.post('/', (req, res) => {
     })
 });
 
+// upon answer, is_correct is marked true
+  // or remains false. subsequent answers
+  // have no effect
 router.put('/', (req, res) => {
-  // only updates on first attempt
+  // only updates on first answer attempt
   const query = `
     UPDATE "session_intervals"
       SET "is_correct" = true

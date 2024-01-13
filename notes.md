@@ -21,5 +21,7 @@ expand on sound options
 
 new user experience
 
+do the thing matt showed us with all or nothing queries
+
 -- BUGS --
 first question of session stored twice

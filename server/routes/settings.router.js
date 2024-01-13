@@ -4,7 +4,6 @@ const router = express.Router();
 
 // selects latest session settings
 router.get('/', (req, res) => {
-
   const id = req.user.id
   const queryValues = [id]
   const queryText = `
@@ -16,7 +15,6 @@ router.get('/', (req, res) => {
     ORDER BY "session_settings".id DESC
     LIMIT 1;
   `
-
   pool.query(queryText, queryValues)
   .then(result => {
     res.send(result.rows[0])
@@ -27,12 +25,16 @@ router.get('/', (req, res) => {
 
 });
 
-// creates session entry then settings entry
+// creates new session entry and settings entry
 router.post('/', (req, res) => {
 
   const intervals = req.body.intervals.toString()
   const playback = req.body.playback
   const id = req.user.id
+
+  // adds session row
+    // session number set to increment
+    // if there are no previous session, session_number set to 1
   const sessionQueryText = `
     INSERT INTO "session" ("session_number", "user_id")
     VALUES (
@@ -49,14 +51,15 @@ router.post('/', (req, res) => {
 
   .then(result => {
 
+    // adds session_settings row
     const sessionId = result.rows[0].id
     const settingsQueryText = `
       INSERT INTO "session_settings" ("intervals_selected", "playback_type", "session_id")
       VALUES ($1, $2, $3)
     `
     const settingsQueryValues = [intervals, playback, sessionId]
-
     pool.query(settingsQueryText, settingsQueryValues)
+
     .then(result => {
       res.sendStatus(201)
     })
@@ -64,9 +67,7 @@ router.post('/', (req, res) => {
       console.error('Settings POST failed:', err)
       res.sendStatus(500)
     })
-
   })
-  
   .catch(err => {
     console.error('Session POST failed:', err)
     res.sendStatus(500)
