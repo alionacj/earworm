@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 import ExitButton from "../Buttons/ExitButton"
-import StartSessionButton from "../Buttons/StartSessionButton"
+import StartSessionButton from "../Buttons/StartButton"
 import { intervals } from '../../tools'
 
 import Accordion from '@mui/material/Accordion';

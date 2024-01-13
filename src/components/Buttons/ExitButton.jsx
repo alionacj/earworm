@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import { Button } from '@mui/material';
 
+
+// routes home
 function ExitButton() {
 
     const history = useHistory()
@@ -11,6 +13,7 @@ function ExitButton() {
         history.push('/home')
     }
 
+    
     return (
         <Button
             variant="contained"

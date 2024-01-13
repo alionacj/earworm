@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { intervals } from "../../tools"
 
 import ExitButton from "../Buttons/ExitButton"
-import StartButton from "../Buttons/StartButton"
+import StartButton from "../Buttons/StartSessionButton"
 
 import { ToggleButtonGroup, ToggleButton, Container } from "@mui/material"
 

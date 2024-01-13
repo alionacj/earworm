@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
-import StartSessionButton from "../Buttons/StartSessionButton"
+import StartSessionButton from "../Buttons/StartButton"
 import StatsButton from "../Buttons/StatsButton"
 import LogOutButton from "../Buttons/LogOutButton"
 

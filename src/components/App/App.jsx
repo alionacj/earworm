@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   HashRouter as Router,
   Redirect,
@@ -6,37 +7,34 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
-import Header from '../Header/Header';
-
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-
+import Header from '../Header/Header';
 import HomePage from '../HomePage/HomePage';
 import Statistics from '../Statistics/Statistics';
-
 import SessionSettings from '../SessionSettings/SessionSettings';
 import Session from '../Session/Session';
 
 import { Container, Box } from '@mui/material';
-
 import './App.css';
 
 
 function App() {
+
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user);
 
+  // on load, gets user info
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 
+  
   return (
     <Router>
+
         <Box 
           id="header"
           sx={{
@@ -67,11 +65,8 @@ function App() {
 
             <Route exact path="/registration">
               {user.id ?
-                // If the user is already logged in, 
-                // redirect them to the /user page
                 <Redirect to="/home" />
                 :
-                // Otherwise, show the registration page
                 <RegisterPage />
               }
             </Route>

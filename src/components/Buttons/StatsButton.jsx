@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import { Button } from '@mui/material';
 
+
+// routes to statistics page
 function StatsButton() {
 
     const history = useHistory()
@@ -10,6 +12,7 @@ function StatsButton() {
     const viewStats = () => {
         history.push('/stats')
     }
+
 
     return (
         <Button
