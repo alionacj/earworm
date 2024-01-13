@@ -24,7 +24,6 @@ function Statistics() {
 
     const userHistory = useSelector(store => store.history)
     const settings = useSelector(store => store.settings)
-    console.log(userHistory)
 
     const calculateScore = (session) => {
         const score = session.intervals.reduce((sum, int) => (

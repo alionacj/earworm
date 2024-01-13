@@ -20,3 +20,6 @@ add transition fades
 expand on sound options
 
 new user experience
+
+-- BUGS --
+first question of session stored twice

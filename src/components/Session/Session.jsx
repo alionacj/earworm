@@ -15,7 +15,6 @@ import './Session.css'
 function Session() {
 
     // hooks
-    const history = useHistory()
     const dispatch = useDispatch()
     
     // reducers
@@ -29,28 +28,16 @@ function Session() {
 
     // generates interval, notes, and stores in db
     const newPrompt = () => {
-        let operator = playbackOperator(settings.playback)
         dispatch({
             type: 'NEW_PROMPT',
-            payload: settings,
-            operator: operator
+            payload: settings
         })
-        setProgress(progress+10)
         setIsCorrect('')
     }
 
-    // mounts first question
-    useEffect(() => {
-        let operator = playbackOperator(settings.playback)
-        dispatch({
-            type: 'NEW_PROMPT',
-            payload: settings,
-            operator: operator
-        })
-    }, [])
-
     // handles sound generation according to playback
     const playInterval = () => {
+
         if (settings.playback === 'harmonic') {
             poly.triggerAttackRelease([prompt.firstNote, prompt.secondNote], '4n')
         } else {
@@ -64,19 +51,25 @@ function Session() {
         settings &&
         <>
             <br/><br/>
-            <LinearProgress variant="determinate" value={progress} max={100}/>
+            <LinearProgress
+                variant="determinate"
+                value={progress}
+                max={100}
+            />
             <br/><br/>
             <Button variant="contained" onClick={playInterval}>▶️</Button>
             <h3>SELECT ANSWER</h3>
                 {settings.intervals.map(interval => (
                     <AnswerButton
                         key={settings.intervals.indexOf(interval)}
-                        interval={interval}
                         setIsAnswered={setIsAnswered}
                         setIsCorrect={setIsCorrect}
+                        setProgress={setProgress}
+                        isAnswered={isAnswered}
+                        progress={progress}
+                        interval={interval}
                         prompt={prompt}
-                    >
-                    </AnswerButton>))}
+                    ></AnswerButton>))}
                     <br></br>
                     {isCorrect}
             <br/><br/>
@@ -85,7 +78,8 @@ function Session() {
                 progress={progress}
                 isAnswered={isAnswered}
                 setIsAnswered={setIsAnswered}
-                newPrompt={newPrompt}/>
+                newPrompt={newPrompt}
+            />
         </>
     )
 }

@@ -1,15 +1,18 @@
 import axios from "axios";
 import { put, takeLatest } from 'redux-saga/effects'
 import * as Tone from 'tone'
-import { transpositionValues, getRandomInt, generateRandomNote } from "../../tools"
+import { transpositionValues, getRandomInt, generateRandomNote, playbackOperator } from "../../tools"
 
 function* newPrompt(action) {
 
     // parsing action
     const intervals = action.payload.intervals
-    const operator = action.operator
     const sessionId = action.payload.sessionId
 
+    const operator = playbackOperator(action.payload.playback)
+
+    console.log(operator)
+    
     // randomly chooses interval from selections & provides transposition number
     let currentInterval = intervals[getRandomInt(0, intervals.length-1)]
     let transpositionValue = transpositionValues[currentInterval]

@@ -4,13 +4,16 @@ import { useDispatch } from 'react-redux';
 
 import { Button } from '@mui/material';
 
-function AnswerButton({ interval, setIsAnswered, setIsCorrect, prompt }) {
+function AnswerButton({ interval, isAnswered, setIsAnswered, setIsCorrect, setProgress, progress, prompt }) {
 
 
     const dispatch = useDispatch()
 
     const handleAnswer = () => {
         setIsAnswered(true)
+        if (isAnswered === false) {
+            setProgress(progress+10)
+        }
         if (interval === prompt.interval) {
             dispatch({
                 type: 'MARK_CORRECT',
@@ -21,7 +24,6 @@ function AnswerButton({ interval, setIsAnswered, setIsCorrect, prompt }) {
             setIsCorrect('Correct!')
         }
         else {
-            console.log('incorrect')
             setIsCorrect('Incorrect!')
         }
     }

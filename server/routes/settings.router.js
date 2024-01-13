@@ -37,9 +37,9 @@ router.post('/', (req, res) => {
     INSERT INTO "session" ("session_number", "user_id")
     VALUES (
       CASE
-      WHEN ( SELECT COUNT(*) FROM "session" WHERE "user_id" = $1 ) != 0
-      THEN ( SELECT MAX("session_number") FROM "session" WHERE "user_id" = $1 ) + 1
-      ELSE 1
+        WHEN ( SELECT COUNT(*) FROM "session" WHERE "user_id" = $1 ) != 0
+        THEN ( SELECT MAX("session_number") FROM "session" WHERE "user_id" = $1 ) + 1
+        ELSE 1
       END,
       $1 )
       RETURNING "id";

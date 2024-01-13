@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
+import { playbackOperator } from '../../tools';
+
 function* fetchSettings() {
     try {
         const response = yield axios.get(`/api/settings/`)
@@ -18,12 +20,17 @@ function* fetchSettings() {
 
 function* newSettings(action) {
     try {
+        console.log(action.payload)
         yield axios({
             method: 'POST',
             url: '/api/settings',
             data: action.payload
         })
-        yield put({ type: 'FETCH_SETTINGS' })
+        action.payload.sessionId ++
+        yield put ({
+            type: 'NEW_PROMPT',
+            payload: action.payload
+        })
         yield action.history.push('/session')
     }
     catch (error) {

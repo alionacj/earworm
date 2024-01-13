@@ -22,7 +22,7 @@ function NextButton({ progress, isAnswered, setIsAnswered, newPrompt }) {
             variant="contained"
             onClick={next}
         >
-                Next
+            Next
         </Button>
     )
 }
