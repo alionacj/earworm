@@ -2,11 +2,12 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { intervals } from "../../tools"
+import { instruments } from "../../instrument"
 
 import ExitButton from "../Buttons/ExitButton"
 import StartButton from "../Buttons/StartSessionButton"
 
-import { ToggleButtonGroup, ToggleButton, Container } from "@mui/material"
+import { ToggleButtonGroup, ToggleButton, Container, Select, MenuItem } from "@mui/material"
 
 
 function SessionOptions() {
@@ -40,25 +41,34 @@ function SessionOptions() {
             route: 'playback'
         })
     }
+    const handleSoundChange = (e, newSound) => {
+        dispatch({
+            type: 'MODIFY_SETTINGS',
+            payload: newSound.props.value,
+            route: 'sound'
+        })
+    }
 
     
     return (
+        settings &&
         <>
             <h3>SELECT INTERVALS</h3>
-                <Container>
-                    <ToggleButtonGroup
-                        value={settings.intervals}
-                        onChange={handleIntervalChange}
-                        >
-                            {intervals.map((interval) => (
-                            <ToggleButton
-                                key={intervals.indexOf(interval)}
-                                value={interval}
-                                >
-                                    {interval}
-                                </ToggleButton>))}
-                    </ToggleButtonGroup>
-                </Container>
+            <Container>
+                <ToggleButtonGroup
+                    value={settings.intervals}
+                    onChange={handleIntervalChange}
+                    >
+                        {intervals.map((interval) => (
+                        <ToggleButton
+                            key={intervals.indexOf(interval)}
+                            value={interval}
+                            >
+                                {interval}
+                        </ToggleButton>))}
+                </ToggleButtonGroup>
+            </Container>
+
             <h3>PRACTICE OPTIONS</h3>
                 <ToggleButtonGroup
                     exclusive
@@ -69,8 +79,23 @@ function SessionOptions() {
                     <ToggleButton value={'descending'}>Descending</ToggleButton>
                     <ToggleButton value={'harmonic'}>Harmonic</ToggleButton>
                 </ToggleButtonGroup>
+
             <h3>SELECT SOUND</h3>
-                <p>dropdown</p>
+            <Select
+                label="select sound"
+                value={settings.sound}
+                onChange={handleSoundChange}
+            >
+                {instruments.map((sound) => (
+                    <MenuItem
+                        key={instruments.indexOf(sound)}
+                        value={sound}
+                    >
+                        {sound}
+                    </MenuItem>
+                ))}
+            </Select>
+            <br/><br/>
             <ExitButton />
             <StartButton settings={settings}/>
         </>

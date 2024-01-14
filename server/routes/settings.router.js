@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   const id = req.user.id
   const queryValues = [id]
   const queryText = `
-    SELECT "session".id AS "session_id", "intervals_selected", "playback_type"
+    SELECT "session".id AS "session_id", "intervals_selected", "playback_type", "sound_type"
     FROM "session_settings"
     JOIN "session"
     ON "session".id = "session_settings".session_id
@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
   `
   pool.query(queryText, queryValues)
   .then(result => {
+    console.log(result.rows[0])
     res.send(result.rows[0])
   })
   .catch(err => {
@@ -30,6 +31,7 @@ router.post('/', (req, res) => {
 
   const intervals = req.body.intervals.toString()
   const playback = req.body.playback
+  const sound = req.body.sound
   const id = req.user.id
 
   // adds session row
@@ -54,10 +56,10 @@ router.post('/', (req, res) => {
     // adds session_settings row
     const sessionId = result.rows[0].id
     const settingsQueryText = `
-      INSERT INTO "session_settings" ("intervals_selected", "playback_type", "session_id")
-      VALUES ($1, $2, $3)
+      INSERT INTO "session_settings" ("intervals_selected", "playback_type", "sound_type", "session_id")
+      VALUES ($1, $2, $3, $4)
     `
-    const settingsQueryValues = [intervals, playback, sessionId]
+    const settingsQueryValues = [intervals, playback, sound, sessionId]
     pool.query(settingsQueryText, settingsQueryValues)
 
     .then(result => {

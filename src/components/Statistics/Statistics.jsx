@@ -25,66 +25,108 @@ function Statistics() {
     const userHistory = useSelector(store => store.history)
     const settings = useSelector(store => store.settings)
 
-    const calculateScore = (session) => {
-        const score = session.intervals.reduce((sum, int) => (
-            sum + Number(int.correct)
-        ), 0)
-        return score
+
+
+    const getTotalScore = () => {
+        let correctCounter = 0
+        let incorrectCounter = 0
+        for (let session of userHistory) {
+            if (session.intervals.length > 0) {
+                for (let interval of session.intervals) {
+                    correctCounter += Number(interval.correct)
+                    incorrectCounter += Number(interval.incorrect)
+                }
+            }
+        }
+        return (correctCounter/(incorrectCounter+correctCounter)*100).toFixed(2)
     }
 
-    const totalscore = () => {
-        counter = 0
+    const getTotalIntScore = (interval) => {
+        let correctCounter = 0
+        let totalCounter = 0
         for (let session of userHistory) {
-            calculateScore(session)
+            if (session.intervals[0]) {
+            for (let sessionInt of session.intervals) {
+                if (interval === sessionInt.interval) {
+                    correctCounter += Number(sessionInt.correct)
+                    totalCounter += Number(sessionInt.correct)
+                    totalCounter += Number(sessionInt.incorrect)
+                }
+            }}
         }
+        return (correctCounter/totalCounter*100).toFixed(2)
     }
+
+    const getSessionScore = (session) => {
+        let correct = 0
+        let total = 0
+        for (let interval of session.intervals) {
+            if (interval) {
+                correct += Number(interval.correct)
+                total += Number(interval.correct)
+                total += Number(interval.incorrect)
+            }
+        }
+        return ((correct/total*100))
+    }
+
 
     return (
         userHistory[0] &&
         <>
             <h3>STATISTICS</h3>
-            <p>TOTAL SCORE: {totalscore}%</p>
+
+            <p>TOTAL SCORE: {getTotalScore()}%</p>
+
+            {/* all interval section */}
             <Accordion>
                 <AccordionSummary>
                     Interval Performance
                 </AccordionSummary>
                 <AccordionDetails>
                     {intervals.map((int) => (
-                        <p key={intervals.indexOf(int)}>{int}: </p>
+                        <p key={intervals.indexOf(int)}>{int}: {getTotalIntScore(int)}%</p>
                     ))}
                 </AccordionDetails>
             </Accordion>
+
+            {/* session section */}
             <Accordion defaultExpanded style={{maxHeight: 375, overflow: 'auto'}}>
                 <AccordionSummary>
                     Session History
                 </AccordionSummary>
+
+                {/* individual sessions */}
                 <AccordionDetails>
-                        {userHistory.map((session) => (
-                            <Accordion key={session.session_number}>
-                                <AccordionSummary>
-                                    Session {session.session_number}
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <p>Date: {session.session_date}</p>
-                                    <p>Playback: {session.playback_type}</p>
-                                    <p>Sound Type: {session.sound_type}</p>
-                                    <p>Score: {calculateScore(session)}/10</p>
-                                    <Accordion>
-                                        <AccordionSummary>
-                                            Intervals
-                                        </AccordionSummary>
+                    {userHistory.map((session) => (
+                        <Accordion key={session.session_number}>
+                            <AccordionSummary>
+                                Session {session.session_number}
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <p>Date: {session.session_date}</p>
+                                <p>Playback: {session.playback_type}</p>
+                                <p>Sound Type: {session.sound_type}</p>
+                                <p>Score: {getSessionScore(session)}%</p>
+
+                                {/* intervals per session */}
+                                <Accordion>
+                                    <AccordionSummary>
+                                        Intervals
+                                    </AccordionSummary>
                                         {session.intervals.map((int) => (
-                                            <AccordionDetails key={`${session.session_number}.${session.intervals.indexOf(int)}`}>
+                                        <AccordionDetails key={`${session.session_number}.${session.intervals.indexOf(int)}`}>
                                             <p>{int.interval}: {int.correct}/{Number(int.correct) + Number(int.incorrect)}</p>
-                                            </AccordionDetails>
+                                        </AccordionDetails>
                                         ))}
-                                    </Accordion>
-                                    <RetryButton />
-                                </AccordionDetails>
-                            </Accordion>
-                        ))}
+                                </Accordion>
+                                <RetryButton />
+                            </AccordionDetails>
+                        </Accordion>
+                    ))}
                 </AccordionDetails>
             </Accordion>
+            
                 <br/>
             <ExitButton />
             <StartSessionButton />

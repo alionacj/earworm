@@ -1,16 +1,13 @@
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState} from "react"
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
-import { playbackOperator } from '../../tools'
-import { instrument, poly } from './instrument'
+import * as Tone from 'tone'
 
 import ExitButton from "../Buttons/ExitButton"
 import NextButton from "../Buttons/NextButton"
 import AnswerButton from "../Buttons/AnswerButton"
+import { instrument, poly } from "../../instrument"
 
-import { Button, LinearProgress, Box } from "@mui/material"
-
-import './Session.css'
+import { Button, LinearProgress } from "@mui/material"
 
 function Session() {
 
@@ -46,6 +43,7 @@ function Session() {
             instrument.triggerRelease('+2n')
         }
     }
+
 
     return (
         settings &&

@@ -2,7 +2,8 @@
 // {
 //   sessionId: 32,
 //   intervals: ['U', 'm3'],
-//   playback: 'ascending'
+//   playback: 'ascending',
+//   sound: 'Synth'
 // }
 
 const settingsReducer = (state = {}, action) => {
@@ -15,6 +16,9 @@ const settingsReducer = (state = {}, action) => {
         }
         else if (action.route === 'playback') {
             return {...state, playback: action.payload}
+        }
+        else if (action.route === 'sound') {
+            return {...state, sound: action.payload}
         }
     }
     return state

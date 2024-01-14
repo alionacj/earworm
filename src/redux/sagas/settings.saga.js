@@ -9,7 +9,8 @@ function* fetchSettings() {
         const reducerData = {
             sessionId: response.data.session_id,
             intervals: response.data.intervals_selected.split(','),
-            playback: response.data.playback_type
+            playback: response.data.playback_type,
+            sound: response.data.sound_type
         }
         yield put({ type: 'SET_SETTINGS', payload: reducerData })
     }
@@ -20,7 +21,6 @@ function* fetchSettings() {
 
 function* newSettings(action) {
     try {
-        console.log(action.payload)
         yield axios({
             method: 'POST',
             url: '/api/settings',
