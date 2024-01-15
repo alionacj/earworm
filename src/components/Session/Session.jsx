@@ -5,7 +5,6 @@ import * as Tone from 'tone'
 import ExitButton from "../Buttons/ExitButton"
 import NextButton from "../Buttons/NextButton"
 import AnswerButton from "../Buttons/AnswerButton"
-import { instrument, poly } from "../../instrument"
 
 import { Button, LinearProgress } from "@mui/material"
 
@@ -35,6 +34,33 @@ function Session() {
     // handles sound generation according to playback
     const playInterval = () => {
 
+        let instrument
+        let poly
+
+        // selects sound to be used based on setting
+        switch (settings.sound) {
+            case 'Synth':
+                instrument = new Tone.Synth().toDestination()
+                poly = new Tone.PolySynth(Tone.Synth).toDestination()
+                break;
+            case 'AMSynth':
+                instrument = new Tone.AMSynth().toDestination()
+                poly = new Tone.PolySynth(Tone.AMSynth).toDestination()
+                break;
+            case 'DuoSynth':
+                instrument = new Tone.DuoSynth().toDestination()
+                poly = new Tone.PolySynth(Tone.DuoSynth).toDestination()
+                break;
+            case 'FMSynth':
+                instrument = new Tone.FMSynth().toDestination()
+                poly = new Tone.PolySynth(Tone.FMSynth).toDestination()
+                break;
+            case 'MonoSynth':
+                instrument = new Tone.MonoSynth().toDestination()
+                poly = new Tone.PolySynth(Tone.MonoSynth).toDestination()
+                break;
+        }
+
         if (settings.playback === 'harmonic') {
             poly.triggerAttackRelease([prompt.firstNote, prompt.secondNote], '4n')
         } else {
@@ -55,10 +81,11 @@ function Session() {
                 max={100}
             />
             <br/><br/>
-            <Button variant="contained" onClick={playInterval}>▶️</Button>
+            <Button variant="contained" onClick={playInterval} >▶️</Button>
             <h3>SELECT ANSWER</h3>
                 {settings.intervals.map(interval => (
                     <AnswerButton
+                    sx={{fontFamily: 'Retro-Gaming'}}
                         key={settings.intervals.indexOf(interval)}
                         setIsAnswered={setIsAnswered}
                         setIsCorrect={setIsCorrect}

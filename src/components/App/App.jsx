@@ -35,16 +35,7 @@ function App() {
   return (
     <Router>
 
-        <Box 
-          id="header"
-          sx={{
-            height: '12.5%',
-            bgcolor:' #427df0',
-            boxShadow: 2
-          }}
-        >
-          <Header />
-        </Box>
+      <Header />
 
       <Container>
         <Box>

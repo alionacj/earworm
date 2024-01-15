@@ -22,6 +22,14 @@ export const transpositionValues = {
     '8ve': 12
 }
 
+export const instruments = [
+    'Synth',
+    'AMSynth',
+    'DuoSynth',
+    'FMSynth',
+    'MonoSynth'
+]
+
 // generates random integer between given numbers
 export function getRandomInt(min, max) {
     min = Math.ceil(min);

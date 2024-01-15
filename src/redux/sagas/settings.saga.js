@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-import { playbackOperator } from '../../tools';
-
 function* fetchSettings() {
     try {
         const response = yield axios.get(`/api/settings/`)

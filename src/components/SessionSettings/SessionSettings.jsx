@@ -1,8 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
-import { intervals } from "../../tools"
-import { instruments } from "../../instrument"
+import { intervals, instruments } from "../../tools"
 
 import ExitButton from "../Buttons/ExitButton"
 import StartButton from "../Buttons/StartSessionButton"
@@ -56,11 +55,13 @@ function SessionOptions() {
             <h3>SELECT INTERVALS</h3>
             <Container>
                 <ToggleButtonGroup
+                
                     value={settings.intervals}
                     onChange={handleIntervalChange}
                     >
                         {intervals.map((interval) => (
                         <ToggleButton
+                        sx={{fontFamily: 'Retro-Gaming'}}
                             key={intervals.indexOf(interval)}
                             value={interval}
                             >
@@ -75,19 +76,20 @@ function SessionOptions() {
                     value={settings.playback}
                     onChange={handlePlaybackChange}
                 >
-                    <ToggleButton value={'ascending'}>Ascending</ToggleButton>
-                    <ToggleButton value={'descending'}>Descending</ToggleButton>
-                    <ToggleButton value={'harmonic'}>Harmonic</ToggleButton>
+                    <ToggleButton sx={{fontFamily: 'Retro-Gaming'}} value={'ascending'}>Ascending</ToggleButton>
+                    <ToggleButton sx={{fontFamily: 'Retro-Gaming'}} value={'descending'}>Descending</ToggleButton>
+                    <ToggleButton sx={{fontFamily: 'Retro-Gaming'}} value={'harmonic'}>Harmonic</ToggleButton>
                 </ToggleButtonGroup>
 
             <h3>SELECT SOUND</h3>
-            <Select
+            <Select sx={{fontFamily: 'Retro-Gaming'}}
                 label="select sound"
                 value={settings.sound}
                 onChange={handleSoundChange}
             >
                 {instruments.map((sound) => (
                     <MenuItem
+                    sx={{fontFamily: 'Retro-Gaming'}}
                         key={instruments.indexOf(sound)}
                         value={sound}
                     >

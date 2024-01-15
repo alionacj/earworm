@@ -4,8 +4,13 @@ body,
   height: 100%;
 }
 
+@font-face {
+  font-family: 'Retro-Gaming';
+  src: url('../../../public/Retro-Gaming.ttf');
+}
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Retro-Gaming';
   margin: 0px;
 }
 
@@ -16,6 +21,24 @@ img {
 
 #header {
   height: 10%
+}
+
+/* --------------------------------------------------------------------------------
+Header
+-------------------------------------------------------------------------------- */
+.header {
+  position: relative;
+  margin: auto;
+  height: 12.5%;
+  background-color: #427DF0;
+}
+
+.headerText {
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* --------------------------------------------------------------------------------

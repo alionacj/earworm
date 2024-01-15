@@ -16,6 +16,7 @@ function StartButton() {
         <Button
             variant="contained"
             onClick={startSession}
+            sx={{fontFamily: 'Retro-Gaming'}}
         >
                 Start
         </Button>

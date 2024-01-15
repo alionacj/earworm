@@ -1,6 +1,5 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 import ExitButton from "../Buttons/ExitButton"
 import StartSessionButton from "../Buttons/StartButton"
@@ -9,11 +8,9 @@ import { intervals } from '../../tools'
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import RetryButton from "../Buttons/RetryButton"
 
 function Statistics() {
 
-    const history = useHistory()
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -23,9 +20,6 @@ function Statistics() {
     }, [])
 
     const userHistory = useSelector(store => store.history)
-    const settings = useSelector(store => store.settings)
-
-
 
     const getTotalScore = () => {
         let correctCounter = 0
@@ -104,7 +98,7 @@ function Statistics() {
                                 Session {session.session_number}
                             </AccordionSummary>
                             <AccordionDetails>
-                                <p>Date: {session.session_date}</p>
+                                <p>Date: {(session.session_date).replaceAll('-', '/').replace('T', ', ').slice(0, -8)}</p>
                                 <p>Playback: {session.playback_type}</p>
                                 <p>Sound Type: {session.sound_type}</p>
                                 <p>Score: {getSessionScore(session)}%</p>
@@ -120,7 +114,8 @@ function Statistics() {
                                         </AccordionDetails>
                                         ))}
                                 </Accordion>
-                                <RetryButton />
+
+                            {/* <RetryButton session={session}/> */}
                             </AccordionDetails>
                         </Accordion>
                     ))}

@@ -11,6 +11,7 @@ function LogOutButton(props) {
 
   return (
     <Button
+    sx={{fontFamily: 'Retro-Gaming'}}
       variant="contained"
       // This button shows up in multiple locations and is styled differently
       // because it's styled differently depending on where it is used, the className
