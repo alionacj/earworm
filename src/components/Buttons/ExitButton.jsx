@@ -28,7 +28,8 @@ function ExitButton() {
                 fontFamily: 'Retro-Gaming',
                 width: 125,
                 ml: '3px',
-                mr: '3px'
+                mr: '3px',
+                bgcolor: '#427cf0'
             }}
             variant="contained"
             onClick={exit}

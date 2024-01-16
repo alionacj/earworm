@@ -18,7 +18,8 @@ function LogOutButton(props) {
         display: 'block',
         width: 225,
         m: 1,
-        mx: 'auto'
+        mx: 'auto',
+        bgcolor: '#427cf0'
       }}
     >
       Log Out

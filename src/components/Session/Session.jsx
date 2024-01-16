@@ -75,11 +75,15 @@ function Session() {
         settings &&
         <>
             <br/><br/>
+            <Box sx={{color: '#427cf0'}}>
             <LinearProgress
+                color='inherit'
                 variant="determinate"
                 value={progress}
                 max={100}
+                sx={{color: '#427cf0'}}
             />
+            </Box>
             <br/><br/>
 
             <Box display={'flex'} justifyContent={'center'}>
@@ -90,7 +94,8 @@ function Session() {
                     width: '75px',
                     height: '75px',
                     display: 'block',
-                    borderRadius: 100
+                    borderRadius: 100,
+                    bgcolor: '#427cf0'
                 }}
             >▶
             </Button>

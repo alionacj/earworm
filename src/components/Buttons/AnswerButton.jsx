@@ -41,7 +41,7 @@ function AnswerButton({ prompt, interval, setIsCorrect,
 
     return (
         <Button
-            sx={{fontFamily: 'Retro-Gaming', textTransform: 'none'}}
+            sx={{fontFamily: 'Retro-Gaming', textTransform: 'none', color:'#427cf0'}}
             className='appButton'
             variant="outlined"
             onClick={handleAnswer}
