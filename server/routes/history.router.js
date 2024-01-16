@@ -43,6 +43,7 @@ router.get('/', (req, res) => {
   pool.query(sessionQuery, sessionValues)
 
   .then(result => {
+    console.log(result.rows)
     sessionHistory = result.rows
 
     // retrieves user's interval data
