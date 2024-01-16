@@ -16,11 +16,17 @@ function StatsButton() {
 
     return (
         <Button
-        sx={{fontFamily: 'Retro-Gaming'}}
-            variant="contained"
             onClick={viewStats}
+            variant="contained"
+            sx={{
+                fontFamily: 'Retro-Gaming',
+                display: 'block',
+                width: 225,
+                m: 1,
+                mx: 'auto'
+            }}
         >
-                Stats
+            Stats
         </Button>
     )
 }

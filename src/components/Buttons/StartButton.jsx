@@ -9,16 +9,22 @@ function StartButton() {
     const history = useHistory()
 
     const startSession = () => {
-        history.push('/options')
+        history.push('/settings')
     }
 
     return (
         <Button
             variant="contained"
             onClick={startSession}
-            sx={{fontFamily: 'Retro-Gaming'}}
+            sx={{
+                fontFamily: 'Retro-Gaming',
+                display: 'block',
+                width: 225,
+                m: 1,
+                mx: 'auto'
+            }}
         >
-                Start
+            Start
         </Button>
     )
 }

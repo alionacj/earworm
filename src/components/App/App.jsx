@@ -13,7 +13,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import Header from '../Header/Header';
 import HomePage from '../HomePage/HomePage';
 import Statistics from '../Statistics/Statistics';
-import SessionSettings from '../SessionSettings/SessionSettings';
+import Settings from '../Settings/Settings';
 import Session from '../Session/Session';
 
 import { Container, Box } from '@mui/material';
@@ -66,8 +66,8 @@ function App() {
               <HomePage />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path="/options">
-              <SessionSettings />
+            <ProtectedRoute exact path="/settings">
+              <Settings />
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/session">

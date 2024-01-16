@@ -11,15 +11,15 @@ function LogOutButton(props) {
 
   return (
     <Button
-    sx={{fontFamily: 'Retro-Gaming'}}
-      variant="contained"
-      // This button shows up in multiple locations and is styled differently
-      // because it's styled differently depending on where it is used, the className
-      // is passed to it from it's parents through React props
-
-      // I think I can get rid of this? ^
-      className={props.className}
       onClick={() => dispatch({ type: 'LOGOUT' })}
+      variant="contained"
+      sx={{
+        fontFamily: 'Retro-Gaming',
+        display: 'block',
+        width: 225,
+        m: 1,
+        mx: 'auto'
+      }}
     >
       Log Out
     </Button>

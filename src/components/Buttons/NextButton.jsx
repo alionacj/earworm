@@ -25,7 +25,10 @@ function NextButton({ progress, newPrompt,
     
     return (
         <Button
-        sx={{fontFamily: 'Retro-Gaming'}}
+        sx={{
+            fontFamily: 'Retro-Gaming',
+                width: 125,
+            }}
             disabled={!isAnswered}
             variant="contained"
             onClick={next}

@@ -6,7 +6,7 @@ import ExitButton from "../Buttons/ExitButton"
 import NextButton from "../Buttons/NextButton"
 import AnswerButton from "../Buttons/AnswerButton"
 
-import { Button, LinearProgress } from "@mui/material"
+import { Box, Button, LinearProgress } from "@mui/material"
 
 function Session() {
 
@@ -81,11 +81,26 @@ function Session() {
                 max={100}
             />
             <br/><br/>
-            <Button variant="contained" onClick={playInterval} >▶️</Button>
-            <h3>SELECT ANSWER</h3>
+
+            <Box display={'flex'} justifyContent={'center'}>
+            <Button
+                variant="contained"
+                onClick={playInterval}
+                sx={{
+                    width: '75px',
+                    height: '75px',
+                    display: 'block',
+                    borderRadius: 100
+                }}
+            >▶
+            </Button>
+            </Box>
+
+            <h3 className="answerHeader">SELECT ANSWER</h3>
+            <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 {settings.intervals.map(interval => (
                     <AnswerButton
-                    sx={{fontFamily: 'Retro-Gaming'}}
+                        sx={{fontFamily: 'Retro-Gaming', flexWrap: 'wrap'}}
                         key={settings.intervals.indexOf(interval)}
                         setIsAnswered={setIsAnswered}
                         setIsCorrect={setIsCorrect}
@@ -96,15 +111,24 @@ function Session() {
                         prompt={prompt}
                     ></AnswerButton>))}
                     <br></br>
-                    {isCorrect}
-            <br/><br/>
-            <ExitButton />
-            <NextButton
-                progress={progress}
-                isAnswered={isAnswered}
-                setIsAnswered={setIsAnswered}
-                newPrompt={newPrompt}
-            />
+            </Box>
+                    <p className="iscorrect">{isCorrect}</p>
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItem: 'center',
+                    justifyContent: 'center',
+                    mt: 4
+                }}
+            >
+                <ExitButton />
+                <NextButton
+                    progress={progress}
+                    isAnswered={isAnswered}
+                    setIsAnswered={setIsAnswered}
+                    newPrompt={newPrompt}
+                />
+            </Box>
         </>
     )
 }

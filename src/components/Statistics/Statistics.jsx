@@ -2,9 +2,9 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import ExitButton from "../Buttons/ExitButton"
-import StartSessionButton from "../Buttons/StartButton"
 import { intervals } from '../../tools'
 
+import { Box } from "@mui/material"
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -68,13 +68,13 @@ function Statistics() {
     return (
         userHistory[0] &&
         <>
-            <h3>STATISTICS</h3>
+            <h3 className="statisticsHeader">STATISTICS</h3>
 
-            <p>TOTAL SCORE: {getTotalScore()}%</p>
+            <p className="statisticsHeader">TOTAL SCORE: {getTotalScore()}%</p>
 
             {/* all interval section */}
-            <Accordion>
-                <AccordionSummary>
+            <Accordion sx={{maxHeight: 375, overflow: 'auto', marginBottom: '10px'}}>
+                <AccordionSummary sx={{textAlign: "center"}}>
                     Interval Performance
                 </AccordionSummary>
                 <AccordionDetails>
@@ -85,7 +85,7 @@ function Statistics() {
             </Accordion>
 
             {/* session section */}
-            <Accordion defaultExpanded style={{maxHeight: 375, overflow: 'auto'}}>
+            <Accordion defaultExpanded sx={{maxHeight: 405, overflow: 'auto', marginBottom: '30px'}}>
                 <AccordionSummary>
                     Session History
                 </AccordionSummary>
@@ -121,10 +121,9 @@ function Statistics() {
                     ))}
                 </AccordionDetails>
             </Accordion>
-            
-                <br/>
+
             <ExitButton />
-            <StartSessionButton />
+
         </>
     )
 }

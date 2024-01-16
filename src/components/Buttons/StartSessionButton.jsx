@@ -28,11 +28,16 @@ function StartSessionButton({ settings }) {
     
     return (
         <Button
-        sx={{fontFamily: 'Retro-Gaming'}}
-            variant="contained"
             onClick={start}
+            variant="contained"
+            sx={{
+                fontFamily: 'Retro-Gaming',
+                width: 125,
+                ml: '3px',
+                mr: '3px'
+            }}
         >
-                Start
+            Start
         </Button>
     )
 }

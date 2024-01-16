@@ -1,18 +1,14 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { intervals, instruments } from "../../tools"
 
 import ExitButton from "../Buttons/ExitButton"
 import StartButton from "../Buttons/StartSessionButton"
 
-import { ToggleButtonGroup, ToggleButton, Container, Select, MenuItem } from "@mui/material"
+import { Box, ToggleButtonGroup, ToggleButton, Select, MenuItem } from "@mui/material"
 
+function Settings() {
 
-function SessionOptions() {
-
-    // hooks
-    const history = useHistory()
     const dispatch = useDispatch()
 
     // loads latest settings on launch
@@ -52,40 +48,60 @@ function SessionOptions() {
     return (
         settings &&
         <>
-            <h3>SELECT INTERVALS</h3>
-            <Container>
-                <ToggleButtonGroup
-                
-                    value={settings.intervals}
-                    onChange={handleIntervalChange}
-                    >
-                        {intervals.map((interval) => (
-                        <ToggleButton
-                        sx={{fontFamily: 'Retro-Gaming'}}
-                            key={intervals.indexOf(interval)}
-                            value={interval}
-                            >
-                                {interval}
-                        </ToggleButton>))}
-                </ToggleButtonGroup>
-            </Container>
+            {/* interval selection */}
+            <h3 className="settingText">SELECT INTERVALS</h3>
+            <div className="selectIntervals">
+            <ToggleButtonGroup
+                spacing={5}
+                className="selectIntervals"
+                value={settings.intervals}
+                onChange={handleIntervalChange}
+                sx={{flexWrap: 'wrap', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+            >
+                {intervals.map((interval) => (
+                    <ToggleButton
+                    sx={{
+                        fontFamily: 'Retro-Gaming',
+                        display: "grid",
+                        width: .14,
+                        textTransform: 'none'
+                    }}
+                        key={intervals.indexOf(interval)}
+                        value={interval}
+                        >
+                            {interval}
+                    </ToggleButton>
+                ))}
+            </ToggleButtonGroup>
+            </div>
 
-            <h3>PRACTICE OPTIONS</h3>
+            {/* playback selection */}
+            <h3 className="settingText">PRACTICE OPTIONS</h3>
                 <ToggleButtonGroup
                     exclusive
+                    orientation='vertical'
                     value={settings.playback}
                     onChange={handlePlaybackChange}
+                    sx={{
+                        width: '100%'
+                    }}
                 >
                     <ToggleButton sx={{fontFamily: 'Retro-Gaming'}} value={'ascending'}>Ascending</ToggleButton>
                     <ToggleButton sx={{fontFamily: 'Retro-Gaming'}} value={'descending'}>Descending</ToggleButton>
                     <ToggleButton sx={{fontFamily: 'Retro-Gaming'}} value={'harmonic'}>Harmonic</ToggleButton>
                 </ToggleButtonGroup>
 
-            <h3>SELECT SOUND</h3>
-            <Select sx={{fontFamily: 'Retro-Gaming'}}
+            {/* sound selection */}
+            <h3 className="settingText">SELECT SOUND</h3>
+            <Select
                 label="select sound"
                 value={settings.sound}
                 onChange={handleSoundChange}
+                sx={{
+                    width: '100%',
+                    fontFamily: 'Retro-Gaming',
+                    textAlign: 'center'
+                }}
             >
                 {instruments.map((sound) => (
                     <MenuItem
@@ -97,11 +113,20 @@ function SessionOptions() {
                     </MenuItem>
                 ))}
             </Select>
-            <br/><br/>
-            <ExitButton />
-            <StartButton settings={settings}/>
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItem: 'center',
+                    justifyContent: 'center',
+                    mt: 4
+                }}
+            >
+                <ExitButton />
+                <StartButton settings={settings}/>
+            </Box>
         </>
     )
 }
 
-export default SessionOptions
+export default Settings

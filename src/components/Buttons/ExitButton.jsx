@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 
 // routes home
@@ -15,13 +15,28 @@ function ExitButton() {
 
     
     return (
+        <>
+        <Box 
+        sx={{
+            display: 'flex',
+            alignItem: 'center',
+            justifyContent: 'center'
+        }}
+    >
         <Button
-            sx={{fontFamily: 'Retro-Gaming'}}
+            sx={{
+                fontFamily: 'Retro-Gaming',
+                width: 125,
+                ml: '3px',
+                mr: '3px'
+            }}
             variant="contained"
             onClick={exit}
         >
                 MENU
         </Button>
+    </Box>
+    </>
     )
 }
 

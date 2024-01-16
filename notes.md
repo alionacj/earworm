@@ -2,12 +2,11 @@
 -- TO-DOs --
 
 finish styling
-- interval names in all caps
-- visual response to answer
 - accordions collapse/expand depending on each other
-- latest session open by default
 - progress bar
 - add transition fades
+
+sql time zone
 
 (probably later)
 new user experience
